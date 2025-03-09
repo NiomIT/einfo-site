@@ -365,3 +365,180 @@ body.dark-mode .btn-outline-secondary:hover {
 
 
 
+/* News card styles */
+.news-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid transparent;
+    height: 100%;
+    overflow: hidden;
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Image container with fixed height */
+.news-img-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Make images fill the container while maintaining aspect ratio */
+.news-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Zoom effect on hover */
+.news-card:hover .news-img {
+    transform: scale(1.05);
+}
+
+/* Category badge positioned over the image in top-left corner */
+.category-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Title as a link */
+.news-title-link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.news-title-link:hover .card-title {
+    color: var(--primary-color);
+}
+
+/* Meta information layout - time and stats on same line */
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: nowrap;
+}
+
+.news-stats {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Ensure the cards maintain consistent size */
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: auto;
+    transition: color 0.2s ease;
+}
+
+/* Interactive elements styling */
+.fa-heart, .fa-comment {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.fa-heart:hover, .fa-comment:hover {
+    transform: scale(1.2);
+}
+
+.fa-heart.fas {
+    color: #e74c3c;
+}
+
+/* Category-specific border colors */
+.news-card:has(.badge.bg-primary) {
+    border-left-color: var(--bs-primary, #007bff);
+}
+
+.news-card:has(.badge.bg-info) {
+    border-left-color: var(--bs-info, #17a2b8);
+}
+
+.news-card:has(.badge.bg-success) {
+    border-left-color: var(--bs-success, #28a745);
+}
+
+.news-card:has(.badge.bg-danger) {
+    border-left-color: var(--bs-danger, #dc3545);
+}
+
+.news-card:has(.badge.bg-warning) {
+    border-left-color: var(--bs-warning, #ffc107);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .news-img-container {
+        height: 180px; /* Slightly smaller on medium devices */
+    }
+}
+
+@media (max-width: 767.98px) {
+    .news-img-container {
+        height: 220px; /* Larger on small devices since cards take full width */
+    }
+}
+
+@media (max-width: 575.98px) {
+    .news-img-container {
+        height: 200px; /* Adjust for very small devices */
+    }
+    
+    /* Ensure meta info still fits on small screens */
+    .news-meta {
+        font-size: 0.85rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Dark mode compatibility */
+body.dark-mode .news-card {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .news-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .news-title-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .news-title-link:hover .card-title {
+    color: var(--primary-color);
+}
+
+body.dark-mode .news-img-container {
+    border-bottom: 1px solid var(--dark-border);
+}
+
+body.dark-mode .text-muted {
+    color: #adb5bd !important;
+}
+
+/* Ensure badge colors work in dark mode */
+body.dark-mode .badge {
+    opacity: 0.9;
+}

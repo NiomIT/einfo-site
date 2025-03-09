@@ -474,3 +474,252 @@ function initializeNewsInteraction() {
         });
     });
 }
+
+// News page functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the news page
+    const newsElements = document.querySelector('.news-feed');
+    if (!newsElements) return;
+    
+    // Post News button functionality
+    const postNewsButton = document.getElementById('postNewsButton');
+    if (postNewsButton) {
+        postNewsButton.addEventListener('click', function() {
+            alert('Post News functionality would open here');
+            // In a real implementation, redirect to form or open modal
+        });
+    }
+    
+    // Category filter functionality
+    const categorySelect = document.getElementById('categorySelect');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            
+            if (selectedCategory) {
+                filterNewsByCategory(selectedCategory);
+            } else {
+                // Show all news cards
+                const newsCards = document.querySelectorAll('.news-card');
+                newsCards.forEach(card => {
+                    card.closest('.col-12').style.display = 'block';
+                });
+            }
+        });
+    }
+    
+    // Filter news by category
+    function filterNewsByCategory(category) {
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        newsCards.forEach(card => {
+            const cardCategory = card.querySelector('.category-badge').textContent.trim().toLowerCase();
+            const cardColumn = card.closest('.col-12');
+            
+            if (category.toLowerCase() === cardCategory || category === '') {
+                cardColumn.style.display = 'block';
+            } else {
+                cardColumn.style.display = 'none';
+            }
+        });
+    }
+    
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    
+    if (searchButton && searchInput) {
+        const performSearch = function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            if (searchTerm) {
+                searchNews(searchTerm);
+            } else {
+                // Show all cards if search is cleared
+                const newsCards = document.querySelectorAll('.news-card');
+                newsCards.forEach(card => {
+                    card.closest('.col-12').style.display = 'block';
+                });
+            }
+        };
+        
+        searchButton.addEventListener('click', performSearch);
+        
+        // Trigger search on Enter key
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    // Search within news cards
+    function searchNews(term) {
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        newsCards.forEach(card => {
+            const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
+            const cardColumn = card.closest('.col-12');
+            
+            // Check if the card title contains the search term
+            if (cardTitle.includes(term)) {
+                cardColumn.style.display = 'block';
+            } else {
+                cardColumn.style.display = 'none';
+            }
+        });
+    }
+    
+    // Load More button functionality
+    const loadMoreButton = document.getElementById('loadMoreButton');
+    if (loadMoreButton) {
+        loadMoreButton.addEventListener('click', function() {
+            loadMoreButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+            loadMoreButton.disabled = true;
+            
+            // Simulate loading more content
+            setTimeout(() => {
+                const newsRow = document.querySelector('.news-feed .row');
+                
+                // Add new news items with the updated structure
+                const newNewsItems = `
+                    <!-- News Item 5 -->
+                    <div class="col-12 col-lg-6 mb-3">
+                      <div class="card news-card h-100">
+                        <div class="news-img-container">
+                          <img src="https://media.istockphoto.com/id/1358013876/photo/web-development-concept.jpg?s=612x612&w=0&k=20&c=_jfDistdVzR-kl4gfY0qEcgmfo-ZFokLnKGiZ9O5j_4=" class="card-img-top news-img" alt="Education">
+                          <span class="category-badge badge bg-warning">Education</span>
+                        </div>
+                        <div class="card-body">
+                          <a href="#" class="news-title-link">
+                            <h5 class="card-title">Local School Wins National Science Competition</h5>
+                          </a>
+                          <div class="news-meta">
+                            <small class="text-muted"><i class="fas fa-clock me-1"></i> 2 days ago</small>
+                            <div class="news-stats">
+                              <span class="me-3"><i class="far fa-heart me-1"></i> 112</span>
+                              <span><i class="far fa-comment me-1"></i> 45</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- News Item 6 -->
+                    <div class="col-12 col-lg-6 mb-3">
+                      <div class="card news-card h-100">
+                        <div class="news-img-container">
+                          <img src="https://media.istockphoto.com/id/1420729179/photo/reforestation-by-planting-a-tree-in-spring-the-garden-is-at-sunset.webp?b=1&s=170667a&w=0&k=20&c=yxHrjyTw1-0XeXZUsVhxFVu9yxQRGa1OX1dz7mVww54=" class="card-img-top news-img" alt="Environment">
+                          <span class="category-badge badge bg-success">Environment</span>
+                        </div>
+                        <div class="card-body">
+                          <a href="#" class="news-title-link">
+                            <h5 class="card-title">New Environmental Initiative Launched in the City</h5>
+                          </a>
+                          <div class="news-meta">
+                            <small class="text-muted"><i class="fas fa-clock me-1"></i> 3 days ago</small>
+                            <div class="news-stats">
+                              <span class="me-3"><i class="far fa-heart me-1"></i> 78</span>
+                              <span><i class="far fa-comment me-1"></i> 32</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                `;
+                
+                // Append the new items to the row
+                newsRow.insertAdjacentHTML('beforeend', newNewsItems);
+                
+                // Reset the button
+                loadMoreButton.innerHTML = 'Load More <i class="fas fa-chevron-down ms-1"></i>';
+                loadMoreButton.disabled = false;
+                
+                // Initialize interactive elements for new cards
+                initializeNewsInteraction();
+                
+                // Apply any active filters
+                const selectedCategory = categorySelect.value;
+                if (selectedCategory) {
+                    filterNewsByCategory(selectedCategory);
+                }
+                
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                if (searchTerm) {
+                    searchNews(searchTerm);
+                }
+            }, 1500);
+        });
+    }
+    
+    // Handle title clicks to simulate "Read More"
+    document.querySelectorAll('.news-title-link').forEach(title => {
+        title.addEventListener('click', function(e) {
+            e.preventDefault();
+            const newsTitle = this.querySelector('.card-title').textContent;
+            // In a real app, this would navigate to the full news article
+            alert(`Reading full article: ${newsTitle}`);
+        });
+    });
+    
+    // Initialize interactive elements
+    initializeNewsInteraction();
+    
+    // Handle image loading errors
+    handleImageErrors();
+});
+
+// Initialize interactive elements
+function initializeNewsInteraction() {
+    // Like functionality
+    const heartIcons = document.querySelectorAll('.fa-heart');
+    heartIcons.forEach(icon => {
+        if (icon.dataset.initialized) return; // Skip if already initialized
+        
+        icon.dataset.initialized = 'true';
+        icon.addEventListener('click', function() {
+            const likeCountElement = this.parentElement;
+            const currentLikes = parseInt(likeCountElement.textContent.trim());
+            
+            if (this.classList.contains('far')) {
+                // Not liked yet - like it
+                this.classList.remove('far');
+                this.classList.add('fas');
+                likeCountElement.innerHTML = `<i class="fas fa-heart me-1" style="color: #e74c3c;"></i> ${currentLikes + 1}`;
+            } else {
+                // Already liked - unlike it
+                this.classList.remove('fas');
+                this.classList.add('far');
+                likeCountElement.innerHTML = `<i class="far fa-heart me-1"></i> ${currentLikes - 1}`;
+            }
+        });
+    });
+    
+    // Handle newly added title links
+    document.querySelectorAll('.news-title-link').forEach(title => {
+        if (title.dataset.initialized) return;
+        
+        title.dataset.initialized = 'true';
+        title.addEventListener('click', function(e) {
+            e.preventDefault();
+            const newsTitle = this.querySelector('.card-title').textContent;
+            // In a real app, this would navigate to the full news article
+            alert(`Reading full article: ${newsTitle}`);
+        });
+    });
+}
+
+// Handle images that fail to load
+function handleImageErrors() {
+    const newsImages = document.querySelectorAll('.news-img');
+    newsImages.forEach(img => {
+        img.addEventListener('error', function() {
+            this.src = 'assets/img/news-placeholder.jpg'; // Fallback image
+            // Alternative: show a placeholder icon
+            // const container = this.closest('.news-img-container');
+            // container.innerHTML = '<i class="fas fa-newspaper fa-3x"></i>';
+            // container.style.display = 'flex';
+            // container.style.justifyContent = 'center';
+            // container.style.alignItems = 'center';
+        });
+    });
+}
