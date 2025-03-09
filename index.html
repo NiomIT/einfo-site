@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item "><img class="mylogo" src="assets/img/active-logo.png" alt="eINFO Logo"></li>
+                <li class="nav-item"><i class="fas fa-address-book"></i></li>
+                <li class="nav-item"><i class="fas fa-newspaper"></i></li>
+                <li class="nav-item"><i class="fas fa-shopping-bag"></i></li>
+                <li class="nav-item"><i class="fas fa-user"></i></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- filter section -->
+    <div class="custom-container">
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-4">
+                    <div class="mb-3">
+                        <select class="form-select" id="countrySelect">
+                            <option value="" selected>Select Country</option>
+                            <option value="usa">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="canada">Canada</option>
+                            <option value="australia">Australia</option>
+                            <option value="india">India</option>
+                            <option value="bangladesh">Bangladesh</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3" id="cityContainer">
+                        <select class="form-select" id="citySelect" disabled>
+                            <option value="" selected>Select City</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3" id="areaContainer">
+                        <select class="form-select" id="areaSelect" disabled>
+                            <option value="" selected>Select Area</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <!-- add section -->
+        <div class="ad-section my-1">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body ">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="card-title fw-bold mb-3">Find Everything in Your Area with eINFO</h3>
+                                    <p class="text-muted">Access all phone numbers, local news, and online shopping information for your area.</p>
+                                    <div class="mt-3 button-group">
+                                        <button class="btn btn-primary me-2 mb-2">Browse Directory</button>
+                                        <button class="btn btn-outline-secondary mb-2">Learn More</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center mt-3 mt-md-0 map-design">
+                                    <div class="bg-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                        <i class="fas fa-map-marker-alt fa-4x text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Category Section -->
+<div class="category-section my-4">
+    <div class="row">
+        <!-- Category 1 -->
+        <div class="col-4 mb-3">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-address-book fa-2x"></i>
+                </div>
+                <div class="category-name">Phonebook</div>
+                <p class="card-text text-muted count-title">52 Categories</p>
+                <div class="item-count">254</div>
+            </div>
+        </div>
+        
+        <!-- Category 2 -->
+        <div class="col-4 mb-3">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-newspaper fa-2x"></i>
+                </div>
+                <div class="category-name">Newsfeed</div>
+                <p class="card-text text-muted count-title">52 Categories</p>
+                <div class="item-count">189</div>
+            </div>
+        </div>
+        <div class="col-4 mb-3">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-shopping-bag fa-2x"></i>
+                </div>
+                <div class="category-name">Marketplace</div>
+                <p class="card-text text-muted count-title">52 Categories</p>
+                <div class="item-count">189</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer with Dropdown Submenu -->
+<footer>
+    <div class="footer-div">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li class="dropdown">
+                <a href="#" class="more-link">More</a>
+                <div class="dropdown-menu">
+                    <a href="admin-login.html">Admin</a>
+                    <a href="ad.html">Ad</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+<style>
+.footer-div {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+.footer-div ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+}
+
+.footer-div ul li {
+    margin: 0 10px;
+    position: relative;
+}
+
+.footer-div ul li a {
+    color: #777;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.footer-div ul li a:hover {
+    color: #00adef;
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 8px 0;
+    z-index: 10;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 15px;
+    text-align: center;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu:before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+}
+
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+</style>
+
+<script>
+// Dropdown functionality for More link
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.dropdown .more-link');
+    const dropdown = document.querySelector('.dropdown');
+    
+    // Toggle dropdown on click
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+});
+</script>
+
+    <script src="assets/js/script.js"></script>
+      <!-- Bootstrap JS Bundle with Popper -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

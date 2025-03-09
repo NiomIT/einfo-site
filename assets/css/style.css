@@ -1,0 +1,166 @@
+/* theme color #00adef */
+
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 90px;
+}
+
+.custom-nav {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    max-width: 100%; /* Changed from 600px to match container width */
+    width: 100%;
+}
+
+.nav-item {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.content {
+    margin-top: 80px;
+    padding: 20px;
+}
+
+/* Custom container that matches both content and nav */
+.custom-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* For mobile screens */
+@media (max-width: 767px) {
+    .custom-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+
+.active {
+    color: #00adef;
+}
+
+.mylogo {
+    height: 22px;
+    width: 22px;
+    margin-bottom: 2px;
+}
+
+
+
+.map-design{
+    overflow: hidden;
+}
+
+.text-primary{
+  color: #00adef !important;
+}
+
+/* .btn-primary{
+    background-color: #00adef !important;
+    border: #00adef ;
+  } */
+
+  .btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #00adef !important;
+    --bs-btn-border-color: #00adef !important;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0496d0 !important;
+    --bs-btn-hover-border-color: #0496d0 !important;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0496d0 !important;
+    --bs-btn-active-border-color: #0496d0 !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #00adef !important;
+    --bs-btn-disabled-border-color: #00adef !important;
+}
+
+/* card  */
+
+/* Category Cards Section */
+.category-section {
+    margin: 20px 0;
+}
+
+.category-card {
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px solid #dee2e6; /* Bootstrap-এর ডিফল্ট বর্ডার কালার */
+    border-radius: 0.375rem; 
+}
+
+
+
+.category-icon,.map-bg {
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    color: #00adef;
+}
+
+.category-name {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.item-count {
+    background-color: #00adef;
+    color: white;
+    border-radius: 30px;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+.count-title{
+    font-size: 12px;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    .category-card {
+        padding: 15px 5px;
+    }
+    
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 0.9rem;
+    }
+}
