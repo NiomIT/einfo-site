@@ -1,6 +1,6 @@
-
- // Sample data for the cascading dropdowns
- const locationData = {
+// Original JavaScript code
+// Sample data for the cascading dropdowns
+const locationData = {
     usa: {
         cities: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'],
         areas: {
@@ -79,8 +79,7 @@ window.addEventListener('scroll', function() {
     lastScrollTop = scrollTop;
 });
 
-
-// code for  Filter section dropdown functionality
+// Code for Filter section dropdown functionality
 document.addEventListener('DOMContentLoaded', function() {
     const countrySelect = document.getElementById('countrySelect');
     const citySelect = document.getElementById('citySelect');
@@ -149,4 +148,80 @@ document.addEventListener('DOMContentLoaded', function() {
             areaSelect.disabled = true;
         }
     });
+});
+
+// Dropdown functionality for More link in footer
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.dropdown .more-link');
+    const dropdown = document.querySelector('.dropdown');
+    
+    // Toggle dropdown on click
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+});
+
+// NEW DARK MODE FUNCTIONALITY
+// Dark mode functionality
+function initDarkMode() {
+    // Check for saved theme preference or use preferred-color-scheme
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled' || 
+                            (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    // Dark mode toggle button in nav
+    const navList = document.querySelector('.nav-list');
+    const darkModeToggle = document.createElement('li');
+    darkModeToggle.className = 'nav-item dark-mode-toggle';
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    navList.appendChild(darkModeToggle);
+    
+    // Apply initial state
+    if (darkModeEnabled) {
+        enableDarkMode();
+    }
+    
+    // Toggle dark mode on click
+    darkModeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    // Listen for OS theme changes
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        });
+    }
+}
+
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.dark-mode-toggle i').className = 'fas fa-sun';
+    localStorage.setItem('darkMode', 'enabled');
+}
+
+function disableDarkMode() {
+    document.body.classList.remove('dark-mode');
+    document.querySelector('.dark-mode-toggle i').className = 'fas fa-moon';
+    localStorage.setItem('darkMode', 'disabled');
+}
+
+// Initialize dark mode on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initDarkMode();
 });

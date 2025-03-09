@@ -1,11 +1,10 @@
+/* Original CSS */
 /* theme color #00adef */
-
 body {
     margin: 0;
     padding: 0;
     padding-top: 90px;
 }
-
 .custom-nav {
     background-color: rgba(255, 255, 255, 0.7);
     width: 100%;
@@ -16,11 +15,9 @@ body {
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
 }
-
 .nav-hidden {
     transform: translateY(-100%);
 }
-
 .nav-list {
     list-style: none;
     padding: 0;
@@ -31,19 +28,16 @@ body {
     max-width: 100%; /* Changed from 600px to match container width */
     width: 100%;
 }
-
 .nav-item {
     display: inline-block;
     font-size: 18px;
     font-weight: bold;
     padding: 10px 15px;
 }
-
 .content {
     margin-top: 80px;
     padding: 20px;
 }
-
 /* Custom container that matches both content and nav */
 .custom-container {
     width: 100%;
@@ -51,7 +45,6 @@ body {
     margin: 0 auto;
     padding: 0 15px;
 }
-
 /* For mobile screens */
 @media (max-width: 767px) {
     .custom-container {
@@ -59,33 +52,25 @@ body {
         padding: 0 10px;
     }
 }
-
 .active {
     color: #00adef;
 }
-
 .mylogo {
     height: 22px;
     width: 22px;
     margin-bottom: 2px;
 }
-
-
-
 .map-design{
     overflow: hidden;
 }
-
 .text-primary{
   color: #00adef !important;
 }
-
 /* .btn-primary{
     background-color: #00adef !important;
     border: #00adef ;
   } */
-
-  .btn-primary {
+.btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #00adef !important;
     --bs-btn-border-color: #00adef !important;
@@ -101,14 +86,11 @@ body {
     --bs-btn-disabled-bg: #00adef !important;
     --bs-btn-disabled-border-color: #00adef !important;
 }
-
 /* card  */
-
 /* Category Cards Section */
 .category-section {
     margin: 20px 0;
 }
-
 .category-card {
     background-color: #fff;
     border-radius: 8px;
@@ -117,11 +99,8 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
     border: 1px solid #dee2e6; /* Bootstrap-এর ডিফল্ট বর্ডার কালার */
-    border-radius: 0.375rem; 
+    border-radius: 0.375rem;
 }
-
-
-
 .category-icon,.map-bg {
     margin-bottom: 15px;
     display: inline-flex;
@@ -133,12 +112,10 @@ body {
     border-radius: 50%;
     color: #00adef;
 }
-
 .category-name {
     font-weight: 600;
     margin-bottom: 10px;
 }
-
 .item-count {
     background-color: #00adef;
     color: white;
@@ -147,20 +124,228 @@ body {
     font-size: 0.8rem;
     display: inline-block;
 }
-
 .count-title{
     font-size: 12px;
 }
-
 /* Responsive styles */
 @media (max-width: 767px) {
     .category-card {
         padding: 15px 5px;
     }
-    
+   
     .category-icon {
         width: 50px;
         height: 50px;
         font-size: 0.9rem;
     }
+}
+
+/* Footer styles */
+.footer-div {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+.footer-div ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+}
+
+.footer-div ul li {
+    margin: 0 10px;
+    position: relative;
+}
+
+.footer-div ul li a {
+    color: #777;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.footer-div ul li a:hover {
+    color: #00adef;
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 8px 0;
+    z-index: 10;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 15px;
+    text-align: center;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu:before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+}
+
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+
+/* Dark mode variables and styles - NEW ADDITIONS */
+:root {
+    --light-bg: #ffffff;
+    --light-text: #333333;
+    --light-border: #dee2e6;
+    --light-card-bg: #ffffff;
+    --light-input-bg: #ffffff;
+    --light-nav-bg: rgba(255, 255, 255, 0.7);
+    --light-category-icon-bg: #f8f9fa;
+    
+    --dark-bg: #121212;
+    --dark-text: #e0e0e0;
+    --dark-border: #2d2d2d;
+    --dark-card-bg: #1e1e1e;
+    --dark-input-bg: #2d2d2d;
+    --dark-nav-bg: rgba(30, 30, 30, 0.8);
+    --dark-category-icon-bg: #2d2d2d;
+    
+    --primary-color: #00adef;
+    --primary-hover: #0496d0;
+}
+
+/* Base styles (light mode default) */
+body {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Navigation */
+body.dark-mode .custom-nav {
+    background-color: var(--dark-nav-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .nav-item {
+    color: var(--dark-text);
+}
+
+/* Cards */
+body.dark-mode .card,
+body.dark-mode .category-card {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .card-title,
+body.dark-mode .category-name {
+    color: var(--dark-text);
+}
+
+body.dark-mode .text-muted {
+    color: #adb5bd !important;
+}
+
+/* Category Icons */
+body.dark-mode .category-icon {
+    background-color: var(--dark-category-icon-bg);
+}
+
+/* Form elements */
+body.dark-mode .form-select {
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+/* Footer */
+body.dark-mode .footer-div {
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .footer-div ul li a {
+    color: #adb5bd;
+}
+
+body.dark-mode .footer-div ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Dropdown menu */
+body.dark-mode .dropdown-menu {
+    background-color: var(--dark-card-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .dropdown-menu a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .dropdown-menu a:hover {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .dropdown-menu:before {
+    border-top-color: var(--dark-card-bg);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    cursor: pointer;
+}
+
+.dark-mode-toggle i {
+    transition: transform 0.5s ease;
+}
+
+.dark-mode-toggle:hover i {
+    transform: rotate(30deg);
+}
+
+/* Additional dark mode styles */
+body.dark-mode .bg-light {
+    background-color: var(--dark-category-icon-bg) !important;
+}
+
+body.dark-mode .btn-outline-secondary {
+    color: #adb5bd;
+    border-color: #4d4d4d;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+    color: #e0e0e0;
+    background-color: #4d4d4d;
 }
