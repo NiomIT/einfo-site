@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - News</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="index.html"><img class="mylogo" src="assets/img/logo.png" alt="eINFO Logo"></a></li>
+                <li class="nav-item"><i class="fas fa-address-book"></i></li>
+                <li class="nav-item active"><i class="fas fa-newspaper"></i></li>
+                <li class="nav-item"><i class="fas fa-shopping-bag"></i></li>
+                <li class="nav-item"><i class="fas fa-user"></i></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- filter section converted to Post News, Category, and Search -->
+    <div class="custom-container">
+        <div class="filter-section my-1">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100" id="postNewsButton">
+                            <i class="fas fa-plus-circle me-2"></i>Post News
+                        </button>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3" id="categoryContainer">
+                        <select class="form-select" id="categorySelect">
+                            <option value="" selected>Select News Category</option>
+                            <option value="politics">Politics</option>
+                            <option value="business">Business</option>
+                            <option value="technology">Technology</option>
+                            <option value="health">Health</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="sports">Sports</option>
+                            <option value="science">Science</option>
+                            <option value="education">Education</option>
+                            <option value="environment">Environment</option>
+                            <option value="local">Local News</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3" id="searchContainer">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search News" id="searchInput">
+                            <button class="btn our-btn-outline" type="button" id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      <!-- News Feed with Images and Responsive Layout -->
+<div class="news-feed my-4">
+    <div class="row">
+      <!-- News Item 1 -->
+      <div class="col-12 col-lg-6 mb-3">
+        <div class="card news-card h-100">
+          <div class="news-img-container">
+            <img src="https://jamuna.tv/wp-content/uploads/2025/03/fbdfsb.jpg" class="card-img-top news-img" alt="Community Center">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Local Community Center Opens After Renovation</h5>
+            <p class="text-muted mb-2">
+              <span class="badge bg-primary me-2">Local News</span>
+              <small><i class="fas fa-clock me-1"></i> 2 hours ago</small>
+            </p>
+            
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-sm btn-outline-primary">Read More</button>
+              <div>
+                <span class="me-3"><i class="far fa-heart me-1"></i> 24</span>
+                <span><i class="far fa-comment me-1"></i> 8</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- News Item 2 -->
+      <div class="col-12 col-lg-6 mb-3">
+        <div class="card news-card h-100">
+          <div class="news-img-container">
+            <img src="https://images.pexels.com/photos/3680219/pexels-photo-3680219.jpeg?cs=srgb&dl=pexels-lukas-rodriguez-1845331-3680219.jpg&fm=jpg" class="card-img-top news-img" alt="Technology Park">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">New Technology Park to Create 500 Jobs</h5>
+            <p class="text-muted mb-2">
+              <span class="badge bg-info me-2">Technology</span>
+              <small><i class="fas fa-clock me-1"></i> 5 hours ago</small>
+            </p>
+            
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-sm btn-outline-primary">Read More</button>
+              <div>
+                <span class="me-3"><i class="far fa-heart me-1"></i> 42</span>
+                <span><i class="far fa-comment me-1"></i> 16</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- News Item 3 -->
+      <div class="col-12 col-lg-6 mb-3">
+        <div class="card news-card h-100">
+          <div class="news-img-container">
+            <img src="assets/img/sports-team.jpg" class="card-img-top news-img" alt="Sports Team">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Local Sports Team Advances to Finals</h5>
+            <p class="text-muted mb-2">
+              <span class="badge bg-success me-2">Sports</span>
+              <small><i class="fas fa-clock me-1"></i> 12 hours ago</small>
+            </p>
+            <p class="card-text">Our local team has secured a spot in the championship finals after a thrilling victory yesterday. The team will now face...</p>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-sm btn-outline-primary">Read More</button>
+              <div>
+                <span class="me-3"><i class="far fa-heart me-1"></i> 87</span>
+                <span><i class="far fa-comment me-1"></i> 34</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- News Item 4 -->
+      <div class="col-12 col-lg-6 mb-3">
+        <div class="card news-card h-100">
+          <div class="news-img-container">
+            <img src="assets/img/health-clinic.jpg" class="card-img-top news-img" alt="Health Clinic">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">New Health Clinic Opens in Downtown</h5>
+            <p class="text-muted mb-2">
+              <span class="badge bg-danger me-2">Health</span>
+              <small><i class="fas fa-clock me-1"></i> 1 day ago</small>
+            </p>
+            <p class="card-text">A state-of-the-art health clinic has opened in the downtown area, offering a range of specialized services including...</p>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-sm btn-outline-primary">Read More</button>
+              <div>
+                <span class="me-3"><i class="far fa-heart me-1"></i> 56</span>
+                <span><i class="far fa-comment me-1"></i> 23</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Load More Button -->
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-primary px-4" id="loadMoreButton">
+        Load More <i class="fas fa-chevron-down ms-1"></i>
+      </button>
+    </div>
+  </div>
+      
+<!-- Footer with Dropdown Submenu -->
+<footer>
+    <div class="footer-div">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li class="dropdown">
+                <a href="#" class="more-link">More</a>
+                <div class="dropdown-menu">
+                    <a href="admin-login.html">Admin</a>
+                    <a href="ad.html">Ad</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

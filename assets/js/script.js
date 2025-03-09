@@ -225,3 +225,252 @@ function disableDarkMode() {
 document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
 });
+
+
+// Add to your assets/js/script.js file
+
+// News page specific functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the news page by looking for news-specific elements
+    const newsElements = document.querySelector('.news-feed');
+    if (!newsElements) return; // Exit if not on news page
+    
+    // Post News button functionality
+    const postNewsButton = document.getElementById('postNewsButton');
+    if (postNewsButton) {
+        postNewsButton.addEventListener('click', function() {
+            // This could redirect to a post form or open a modal
+            alert('Post News functionality would open here');
+            // For a real implementation, you might do:
+            // window.location.href = 'post-news.html';
+            // or open a modal:
+            // $('#postNewsModal').modal('show'); // If using Bootstrap's modal
+        });
+    }
+    
+    // Category filter functionality
+    const categorySelect = document.getElementById('categorySelect');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            
+            // In a real application, this would filter news by category
+            if (selectedCategory) {
+                console.log('Filtering news by category:', selectedCategory);
+                // Filter news cards by category
+                filterNewsByCategory(selectedCategory);
+            } else {
+                // Show all news cards
+                const newsCards = document.querySelectorAll('.news-card');
+                newsCards.forEach(card => {
+                    card.closest('.col-12').style.display = 'block';
+                });
+            }
+        });
+    }
+    
+    // Filter news cards by category
+    function filterNewsByCategory(category) {
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        newsCards.forEach(card => {
+            const cardCategory = card.querySelector('.badge').textContent.trim().toLowerCase();
+            const cardColumn = card.closest('.col-12');
+            
+            // Check if the card's category matches the selected category
+            if (category.toLowerCase() === cardCategory || category === '') {
+                cardColumn.style.display = 'block';
+            } else {
+                cardColumn.style.display = 'none';
+            }
+        });
+    }
+    
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    
+    if (searchButton && searchInput) {
+        const performSearch = function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            if (searchTerm) {
+                console.log('Searching for:', searchTerm);
+                // Search in news cards
+                searchNews(searchTerm);
+            } else {
+                // Show all cards if search is cleared
+                const newsCards = document.querySelectorAll('.news-card');
+                newsCards.forEach(card => {
+                    card.closest('.col-12').style.display = 'block';
+                });
+            }
+        };
+        
+        searchButton.addEventListener('click', performSearch);
+        
+        // Also trigger search on Enter key
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    // Search within news cards
+    function searchNews(term) {
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        newsCards.forEach(card => {
+            const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
+            const cardText = card.querySelector('.card-text').textContent.toLowerCase();
+            const cardColumn = card.closest('.col-12');
+            
+            // Check if the card contains the search term
+            if (cardTitle.includes(term) || cardText.includes(term)) {
+                cardColumn.style.display = 'block';
+            } else {
+                cardColumn.style.display = 'none';
+            }
+        });
+    }
+    
+    // Load More button functionality
+    const loadMoreButton = document.getElementById('loadMoreButton');
+    if (loadMoreButton) {
+        loadMoreButton.addEventListener('click', function() {
+            loadMoreButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+            loadMoreButton.disabled = true;
+            
+            // Simulate loading more content (in a real app, this would be an API call)
+            setTimeout(() => {
+                const newsRow = document.querySelector('.news-feed .row');
+                
+                // Add two new news items
+                const newNewsItems = `
+                    <!-- News Item 5 -->
+                    <div class="col-12 col-lg-6 mb-3">
+                      <div class="card news-card h-100">
+                        <div class="news-img-container">
+                          <img src="assets/img/education.jpg" class="card-img-top news-img" alt="Education">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Local School Wins National Science Competition</h5>
+                          <p class="text-muted mb-2">
+                            <span class="badge bg-warning me-2">Education</span>
+                            <small><i class="fas fa-clock me-1"></i> 2 days ago</small>
+                          </p>
+                          <p class="card-text">Students from the local high school have won first place in the National Science Competition with their innovative project on...</p>
+                          <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-primary">Read More</button>
+                            <div>
+                              <span class="me-3"><i class="far fa-heart me-1"></i> 112</span>
+                              <span><i class="far fa-comment me-1"></i> 45</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- News Item 6 -->
+                    <div class="col-12 col-lg-6 mb-3">
+                      <div class="card news-card h-100">
+                        <div class="news-img-container">
+                          <img src="assets/img/environment.jpg" class="card-img-top news-img" alt="Environment">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">New Environmental Initiative Launched in the City</h5>
+                          <p class="text-muted mb-2">
+                            <span class="badge bg-success me-2">Environment</span>
+                            <small><i class="fas fa-clock me-1"></i> 3 days ago</small>
+                          </p>
+                          <p class="card-text">The city has launched a new environmental initiative aimed at reducing carbon emissions and promoting sustainable practices among local businesses...</p>
+                          <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-primary">Read More</button>
+                            <div>
+                              <span class="me-3"><i class="far fa-heart me-1"></i> 78</span>
+                              <span><i class="far fa-comment me-1"></i> 32</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                `;
+                
+                // Append the new items to the row
+                newsRow.insertAdjacentHTML('beforeend', newNewsItems);
+                
+                // Reset the button
+                loadMoreButton.innerHTML = 'Load More <i class="fas fa-chevron-down ms-1"></i>';
+                loadMoreButton.disabled = false;
+                
+                // Initialize event listeners for new cards
+                initializeNewsInteraction();
+                
+                // Apply any active filters
+                const selectedCategory = categorySelect.value;
+                if (selectedCategory) {
+                    filterNewsByCategory(selectedCategory);
+                }
+                
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                if (searchTerm) {
+                    searchNews(searchTerm);
+                }
+            }, 1500); // Simulate loading delay
+        });
+    }
+    
+    // Initialize any interactive elements
+    initializeNewsInteraction();
+    
+    // Handle image loading errors by providing a placeholder
+    handleImageErrors();
+});
+
+// Handle images that fail to load
+function handleImageErrors() {
+    const newsImages = document.querySelectorAll('.news-img');
+    newsImages.forEach(img => {
+        img.addEventListener('error', function() {
+            const container = this.closest('.news-img-container');
+            
+            // Add placeholder icon
+            const placeholderIcon = document.createElement('div');
+            placeholderIcon.innerHTML = `<i class="fas fa-newspaper placeholder-icon"></i>`;
+            container.appendChild(placeholderIcon);
+            container.classList.add('placeholder');
+            
+            // Hide the broken image
+            this.style.display = 'none';
+        });
+    });
+}
+
+// Function to initialize interactive elements like likes and comments
+function initializeNewsInteraction() {
+    // Like functionality
+    const heartIcons = document.querySelectorAll('.fa-heart');
+    heartIcons.forEach(icon => {
+        if (icon.dataset.initialized) return; // Skip if already initialized
+        
+        icon.dataset.initialized = 'true';
+        icon.addEventListener('click', function() {
+            const likeCountElement = this.parentElement;
+            const currentLikes = parseInt(likeCountElement.textContent.trim());
+            
+            if (this.classList.contains('far')) {
+                // Not liked yet - like it
+                this.classList.remove('far');
+                this.classList.add('fas');
+                this.style.color = '#e74c3c'; // Red heart
+                likeCountElement.innerHTML = `<i class="fas fa-heart me-1" style="color: #e74c3c;"></i> ${currentLikes + 1}`;
+            } else {
+                // Already liked - unlike it
+                this.classList.remove('fas');
+                this.classList.add('far');
+                this.style.color = ''; // Reset color
+                likeCountElement.innerHTML = `<i class="far fa-heart me-1"></i> ${currentLikes - 1}`;
+            }
+        });
+    });
+}
