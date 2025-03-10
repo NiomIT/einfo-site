@@ -810,23 +810,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const marketplace = document.querySelector('.product-grid');
     if (!marketplace) return;
     
-    // Wishlist functionality
-    const wishlistButtons = document.querySelectorAll('.wishlist-btn');
-    wishlistButtons.forEach(btn => {
+    // Save functionality
+    const saveButtons = document.querySelectorAll('.save-btn');
+    saveButtons.forEach(btn => {
         btn.addEventListener('click', function() {
-            const heartIcon = this.querySelector('.fa-heart');
+            const bookmarkIcon = this.querySelector('.fa-bookmark');
             
-            if (heartIcon.classList.contains('far')) {
-                // Add to wishlist
-                heartIcon.classList.remove('far');
-                heartIcon.classList.add('fas');
+            if (bookmarkIcon.classList.contains('far')) {
+                // Add to saved items
+                bookmarkIcon.classList.remove('far');
+                bookmarkIcon.classList.add('fas');
+                showToast('Product saved');
             } else {
-                // Remove from wishlist
-                heartIcon.classList.remove('fas');
-                heartIcon.classList.add('far');
+                // Remove from saved items
+                bookmarkIcon.classList.remove('fas');
+                bookmarkIcon.classList.add('far');
+                showToast('Product removed from saved items');
             }
         });
     });
+    
+    // Add to cart functionality
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    addToCartButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productTitle = this.closest('.product-card').querySelector('.card-title').textContent;
+            showToast(`${productTitle} added to cart`);
+        });
+    });
+    
+    // Helper function to show toast notifications
+    function showToast(message) {
+        // In a real implementation, this would show a toast notification
+        console.log('Toast:', message);
+    }
     
     // Post product button
     const postProductButton = document.getElementById('postProductButton');
@@ -954,20 +972,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize all marketplace functionality
     function initializeMarketplace() {
-        // Re-attach event listeners to wishlist buttons
-        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        // Re-attach event listeners to save buttons
+        document.querySelectorAll('.save-btn').forEach(btn => {
             if (!btn.dataset.initialized) {
                 btn.dataset.initialized = 'true';
                 btn.addEventListener('click', function() {
-                    const heartIcon = this.querySelector('.fa-heart');
+                    const bookmarkIcon = this.querySelector('.fa-bookmark');
                     
-                    if (heartIcon.classList.contains('far')) {
-                        heartIcon.classList.remove('far');
-                        heartIcon.classList.add('fas');
+                    if (bookmarkIcon.classList.contains('far')) {
+                        bookmarkIcon.classList.remove('far');
+                        bookmarkIcon.classList.add('fas');
+                        showToast('Product saved');
                     } else {
-                        heartIcon.classList.remove('fas');
-                        heartIcon.classList.add('far');
+                        bookmarkIcon.classList.remove('fas');
+                        bookmarkIcon.classList.add('far');
+                        showToast('Product removed from saved items');
                     }
+                });
+            }
+        });
+        
+        // Re-attach event listeners to add to cart buttons
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            if (!btn.dataset.initialized) {
+                btn.dataset.initialized = 'true';
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productTitle = this.closest('.product-card').querySelector('.card-title').textContent;
+                    showToast(`${productTitle} added to cart`);
                 });
             }
         });
