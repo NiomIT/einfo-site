@@ -759,26 +759,24 @@ function initDarkMode() {
     const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled' || 
                             (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
     
-    // Dark mode toggle button in nav
-    const navList = document.querySelector('.nav-list');
-    const darkModeToggle = document.createElement('li');
-    darkModeToggle.className = 'nav-item dark-mode-toggle';
-    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    navList.appendChild(darkModeToggle);
-    
     // Apply initial state
     if (darkModeEnabled) {
         enableDarkMode();
     }
     
-    // Toggle dark mode on click
-    darkModeToggle.addEventListener('click', () => {
-        if (document.body.classList.contains('dark-mode')) {
-            disableDarkMode();
-        } else {
-            enableDarkMode();
-        }
-    });
+    // Find your existing dark mode toggle button instead of creating a new one
+    const existingDarkModeToggle = document.querySelector('.your-existing-dark-mode-button-selector');
+    
+    if (existingDarkModeToggle) {
+        // Toggle dark mode on click using your existing button
+        existingDarkModeToggle.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+    }
 
     // Listen for OS theme changes
     if (window.matchMedia) {
@@ -790,6 +788,23 @@ function initDarkMode() {
             }
         });
     }
+}
+
+// These functions need to be defined elsewhere in your code
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('darkMode', 'enabled');
+    // Update icon if needed
+    const darkModeIcon = document.querySelector('.your-existing-dark-mode-button-selector i');
+    if (darkModeIcon) darkModeIcon.className = 'fas fa-sun';
+}
+
+function disableDarkMode() {
+    document.body.classList.remove('dark-mode');
+    localStorage.setItem('darkMode', 'disabled');
+    // Update icon if needed
+    const darkModeIcon = document.querySelector('.your-existing-dark-mode-button-selector i');
+    if (darkModeIcon) darkModeIcon.className = 'fas fa-moon';
 }
 
 
