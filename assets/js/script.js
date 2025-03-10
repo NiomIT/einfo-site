@@ -722,4 +722,266 @@ function handleImageErrors() {
             // container.style.alignItems = 'center';
         });
     });
+}// Updated dark mode functions to handle logo switching
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.dark-mode-toggle i').className = 'fas fa-sun';
+    localStorage.setItem('darkMode', 'enabled');
+    
+    // Make sure category badges are still visible in dark mode
+    const badges = document.querySelectorAll('.category-badge');
+    badges.forEach(badge => {
+        badge.style.opacity = '1';
+    });
+    
+    // Alternative direct logo swap if CSS approach doesn't work
+    const logo = document.getElementById('siteLogo');
+    if (logo) {
+        logo.src = 'assets/img/white-logo.png';
+    }
 }
+
+function disableDarkMode() {
+    document.body.classList.remove('dark-mode');
+    document.querySelector('.dark-mode-toggle i').className = 'fas fa-moon';
+    localStorage.setItem('darkMode', 'disabled');
+    
+    // Change logo back to default when switching to light mode
+    const logo = document.getElementById('siteLogo');
+    if (logo) {
+        logo.src = 'assets/img/logo.png';
+    }
+}
+
+// Initialize dark mode with logo control
+function initDarkMode() {
+    // Check for saved theme preference or use preferred-color-scheme
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled' || 
+                            (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    // Dark mode toggle button in nav
+    const navList = document.querySelector('.nav-list');
+    const darkModeToggle = document.createElement('li');
+    darkModeToggle.className = 'nav-item dark-mode-toggle';
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    navList.appendChild(darkModeToggle);
+    
+    // Apply initial state
+    if (darkModeEnabled) {
+        enableDarkMode();
+    }
+    
+    // Toggle dark mode on click
+    darkModeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    // Listen for OS theme changes
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+// Add this to your existing script.js file
+
+// Initialize marketplace functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the marketplace page
+    const marketplace = document.querySelector('.product-grid');
+    if (!marketplace) return;
+    
+    // Wishlist functionality
+    const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+    wishlistButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const heartIcon = this.querySelector('.fa-heart');
+            
+            if (heartIcon.classList.contains('far')) {
+                // Add to wishlist
+                heartIcon.classList.remove('far');
+                heartIcon.classList.add('fas');
+            } else {
+                // Remove from wishlist
+                heartIcon.classList.remove('fas');
+                heartIcon.classList.add('far');
+            }
+        });
+    });
+    
+    // Post product button
+    const postProductButton = document.getElementById('postProductButton');
+    if (postProductButton) {
+        postProductButton.addEventListener('click', function() {
+            // This would open a form to post a new product
+            alert('Post a new product form would open here');
+            // In a real implementation, you might redirect to a form or open a modal
+        });
+    }
+    
+    // Category filter functionality
+    const categorySelect = document.getElementById('categorySelect');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            const selectedCategory = this.value.toLowerCase();
+            
+            if (selectedCategory) {
+                filterProductsByCategory(selectedCategory);
+            } else {
+                // Show all products
+                const productCards = document.querySelectorAll('.product-card');
+                productCards.forEach(card => {
+                    card.closest('.col-6').style.display = 'block';
+                });
+            }
+        });
+    }
+    
+    // Function to filter products by category
+    function filterProductsByCategory(category) {
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            const productCategory = card.querySelector('.product-category').textContent.toLowerCase();
+            const productColumn = card.closest('.col-6');
+            
+            if (productCategory === category || category === '') {
+                productColumn.style.display = 'block';
+            } else {
+                productColumn.style.display = 'none';
+            }
+        });
+    }
+    
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    
+    if (searchButton && searchInput) {
+        const performSearch = function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm) {
+                searchProducts(searchTerm);
+            } else {
+                // Show all products if search is cleared
+                const productCards = document.querySelectorAll('.product-card');
+                productCards.forEach(card => {
+                    card.closest('.col-6').style.display = 'block';
+                });
+            }
+        };
+        
+        searchButton.addEventListener('click', performSearch);
+        
+        // Also trigger search on Enter key
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    // Function to search products
+    function searchProducts(term) {
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            const productTitle = card.querySelector('.card-title').textContent.toLowerCase();
+            const productCategory = card.querySelector('.product-category').textContent.toLowerCase();
+            const productColumn = card.closest('.col-6');
+            
+            // Check if product title or category contains the search term
+            if (productTitle.includes(term) || productCategory.includes(term)) {
+                productColumn.style.display = 'block';
+            } else {
+                productColumn.style.display = 'none';
+            }
+        });
+    }
+    
+    // Load More button functionality
+    const loadMoreButton = document.getElementById('loadMoreButton');
+    if (loadMoreButton) {
+        loadMoreButton.addEventListener('click', function() {
+            loadMoreButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+            loadMoreButton.disabled = true;
+            
+            // Simulate loading more products (in a real application, this would be an API call)
+            setTimeout(() => {
+                // Reset the button
+                loadMoreButton.innerHTML = 'Load More <i class="fas fa-chevron-down ms-1"></i>';
+                loadMoreButton.disabled = false;
+                
+                // In a real implementation, you would append new products here
+                alert('In a real implementation, more products would be loaded here');
+                
+                // Re-initialize event listeners for new products if needed
+                initializeMarketplace();
+            }, 1500); // Simulate loading delay
+        });
+    }
+    
+    // Handle Product Details
+    const productLinks = document.querySelectorAll('.product-title-link');
+    productLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productTitle = this.querySelector('.card-title').textContent;
+            // In a real application, this would navigate to the product detail page
+            alert(`Viewing details for: ${productTitle}`);
+        });
+    });
+    
+    // Initialize all marketplace functionality
+    function initializeMarketplace() {
+        // Re-attach event listeners to wishlist buttons
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            if (!btn.dataset.initialized) {
+                btn.dataset.initialized = 'true';
+                btn.addEventListener('click', function() {
+                    const heartIcon = this.querySelector('.fa-heart');
+                    
+                    if (heartIcon.classList.contains('far')) {
+                        heartIcon.classList.remove('far');
+                        heartIcon.classList.add('fas');
+                    } else {
+                        heartIcon.classList.remove('fas');
+                        heartIcon.classList.add('far');
+                    }
+                });
+            }
+        });
+        
+        // Re-attach event listeners to product links
+        document.querySelectorAll('.product-title-link').forEach(link => {
+            if (!link.dataset.initialized) {
+                link.dataset.initialized = 'true';
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productTitle = this.querySelector('.card-title').textContent;
+                    alert(`Viewing details for: ${productTitle}`);
+                });
+            }
+        });
+    }
+});

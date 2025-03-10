@@ -1,10 +1,14 @@
-/* Original CSS */
 /* theme color #00adef */
 body {
     margin: 0;
     padding: 0;
     padding-top: 90px;
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Navigation */
 .custom-nav {
     background-color: rgba(255, 255, 255, 0.7);
     width: 100%;
@@ -15,9 +19,11 @@ body {
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
 }
+
 .nav-hidden {
     transform: translateY(-100%);
 }
+
 .nav-list {
     list-style: none;
     padding: 0;
@@ -25,51 +31,54 @@ body {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-    max-width: 100%; /* Changed from 600px to match container width */
+    max-width: 100%;
     width: 100%;
 }
+
 .nav-item {
     display: inline-block;
     font-size: 18px;
     font-weight: bold;
     padding: 10px 15px;
 }
+
+.nav-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.active {
+    color: #00adef;
+}
+
+.mylogo {
+    height: 22px;
+    width: 22px;
+    margin-bottom: 2px;
+}
+
+/* Container and layout */
 .content {
     margin-top: 80px;
     padding: 20px;
 }
-/* Custom container that matches both content and nav */
+
 .custom-container {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
     padding: 0 15px;
 }
-/* For mobile screens */
-@media (max-width: 767px) {
-    .custom-container {
-        width: 100%;
-        padding: 0 10px;
-    }
+
+/* Colors and buttons */
+.text-primary {
+    color: #00adef !important;
 }
-.active {
-    color: #00adef;
-}
-.mylogo {
-    height: 22px;
-    width: 22px;
-    margin-bottom: 2px;
-}
-.map-design{
+
+.map-design {
     overflow: hidden;
 }
-.text-primary{
-  color: #00adef !important;
-}
-/* .btn-primary{
-    background-color: #00adef !important;
-    border: #00adef ;
-  } */
+
 .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #00adef !important;
@@ -86,11 +95,16 @@ body {
     --bs-btn-disabled-bg: #00adef !important;
     --bs-btn-disabled-border-color: #00adef !important;
 }
-/* card  */
-/* Category Cards Section */
+
+.our-btn-outline {
+    border: 1px solid #dee2e6;
+}
+
+/* Category Cards */
 .category-section {
     margin: 20px 0;
 }
+
 .category-card {
     background-color: #fff;
     border-radius: 8px;
@@ -98,10 +112,11 @@ body {
     padding: 20px 10px;
     margin-bottom: 20px;
     cursor: pointer;
-    border: 1px solid #dee2e6; /* Bootstrap-এর ডিফল্ট বর্ডার কালার */
+    border: 1px solid #dee2e6;
     border-radius: 0.375rem;
 }
-.category-icon,.map-bg {
+
+.category-icon, .map-bg {
     margin-bottom: 15px;
     display: inline-flex;
     align-items: center;
@@ -112,10 +127,12 @@ body {
     border-radius: 50%;
     color: #00adef;
 }
+
 .category-name {
     font-weight: 600;
     margin-bottom: 10px;
 }
+
 .item-count {
     background-color: #00adef;
     color: white;
@@ -124,23 +141,12 @@ body {
     font-size: 0.8rem;
     display: inline-block;
 }
-.count-title{
+
+.count-title {
     font-size: 12px;
 }
-/* Responsive styles */
-@media (max-width: 767px) {
-    .category-card {
-        padding: 15px 5px;
-    }
-   
-    .category-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 0.9rem;
-    }
-}
 
-/* Footer styles */
+/* Footer */
 .footer-div {
     text-align: center;
     margin: 20px 0;
@@ -171,7 +177,7 @@ body {
     color: #00adef;
 }
 
-/* Dropdown styling */
+/* Dropdown */
 .dropdown {
     position: relative;
 }
@@ -218,7 +224,97 @@ body {
     display: block;
 }
 
-/* Dark mode variables and styles - NEW ADDITIONS */
+/* News card styles */
+.news-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    overflow: hidden;
+    /* Removed the border-left */
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.news-img-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.news-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-img {
+    transform: scale(1.05);
+}
+
+.category-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.news-title-link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.news-title-link:hover .card-title {
+    color: var(--primary-color);
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: nowrap;
+}
+
+.news-stats {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: auto;
+    transition: color 0.2s ease;
+}
+
+.fa-heart, .fa-comment {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.fa-heart:hover, .fa-comment:hover {
+    transform: scale(1.2);
+}
+
+.fa-heart.fas {
+    color: #e74c3c;
+}
+
+/* Dark mode variables */
 :root {
     --light-bg: #ffffff;
     --light-text: #333333;
@@ -240,20 +336,12 @@ body {
     --primary-hover: #0496d0;
 }
 
-/* Base styles (light mode default) */
-body {
-    background-color: var(--light-bg);
-    color: var(--light-text);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
 /* Dark mode styles */
 body.dark-mode {
     background-color: var(--dark-bg);
     color: var(--dark-text);
 }
 
-/* Navigation */
 body.dark-mode .custom-nav {
     background-color: var(--dark-nav-bg);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -263,7 +351,6 @@ body.dark-mode .nav-item {
     color: var(--dark-text);
 }
 
-/* Cards */
 body.dark-mode .card,
 body.dark-mode .category-card {
     background-color: var(--dark-card-bg);
@@ -279,19 +366,17 @@ body.dark-mode .text-muted {
     color: #adb5bd !important;
 }
 
-/* Category Icons */
 body.dark-mode .category-icon {
     background-color: var(--dark-category-icon-bg);
 }
 
-/* Form elements */
-body.dark-mode .form-select {
+body.dark-mode .form-select,
+body.dark-mode .form-control {
     background-color: var(--dark-input-bg);
     color: var(--dark-text);
     border-color: var(--dark-border);
 }
 
-/* Footer */
 body.dark-mode .footer-div {
     border-color: var(--dark-border);
 }
@@ -304,10 +389,10 @@ body.dark-mode .footer-div ul li a:hover {
     color: var(--primary-color);
 }
 
-/* Dropdown menu */
 body.dark-mode .dropdown-menu {
     background-color: var(--dark-card-bg);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-color: var(--dark-border);
 }
 
 body.dark-mode .dropdown-menu a {
@@ -322,20 +407,6 @@ body.dark-mode .dropdown-menu:before {
     border-top-color: var(--dark-card-bg);
 }
 
-/* Dark mode toggle button */
-.dark-mode-toggle {
-    cursor: pointer;
-}
-
-.dark-mode-toggle i {
-    transition: transform 0.5s ease;
-}
-
-.dark-mode-toggle:hover i {
-    transform: rotate(30deg);
-}
-
-/* Additional dark mode styles */
 body.dark-mode .bg-light {
     background-color: var(--dark-category-icon-bg) !important;
 }
@@ -350,176 +421,13 @@ body.dark-mode .btn-outline-secondary:hover {
     background-color: #4d4d4d;
 }
 
-.nav-item a{
-    text-decoration: none;
-    color:inherit;
-}
-
-.our-btn-outline{
-    border: 1px solid #dee2e6;
-}
-
-
-
-
-
-
-
-/* News card styles */
-.news-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-left: 4px solid transparent;
-    height: 100%;
-    overflow: hidden;
-}
-
-.news-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Image container with fixed height */
-.news-img-container {
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Make images fill the container while maintaining aspect ratio */
-.news-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
-}
-
-/* Zoom effect on hover */
-.news-card:hover .news-img {
-    transform: scale(1.05);
-}
-
-/* Category badge positioned over the image in top-left corner */
-.category-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-    font-size: 0.75rem;
-    padding: 0.35em 0.65em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Title as a link */
-.news-title-link {
-    color: inherit;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.news-title-link:hover .card-title {
-    color: var(--primary-color);
-}
-
-/* Meta information layout - time and stats on same line */
-.news-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    flex-wrap: nowrap;
-}
-
-.news-stats {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
-/* Ensure the cards maintain consistent size */
-.card-body {
-    display: flex;
-    flex-direction: column;
-}
-
-.card-title {
-    margin-bottom: auto;
-    transition: color 0.2s ease;
-}
-
-/* Interactive elements styling */
-.fa-heart, .fa-comment {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.fa-heart:hover, .fa-comment:hover {
-    transform: scale(1.2);
-}
-
-.fa-heart.fas {
-    color: #e74c3c;
-}
-
-/* Category-specific border colors */
-.news-card:has(.badge.bg-primary) {
-    border-left-color: var(--bs-primary, #007bff);
-}
-
-.news-card:has(.badge.bg-info) {
-    border-left-color: var(--bs-info, #17a2b8);
-}
-
-.news-card:has(.badge.bg-success) {
-    border-left-color: var(--bs-success, #28a745);
-}
-
-.news-card:has(.badge.bg-danger) {
-    border-left-color: var(--bs-danger, #dc3545);
-}
-
-.news-card:has(.badge.bg-warning) {
-    border-left-color: var(--bs-warning, #ffc107);
-}
-
-/* Responsive adjustments */
-@media (max-width: 991.98px) {
-    .news-img-container {
-        height: 180px; /* Slightly smaller on medium devices */
-    }
-}
-
-@media (max-width: 767.98px) {
-    .news-img-container {
-        height: 220px; /* Larger on small devices since cards take full width */
-    }
-}
-
-@media (max-width: 575.98px) {
-    .news-img-container {
-        height: 200px; /* Adjust for very small devices */
-    }
-    
-    /* Ensure meta info still fits on small screens */
-    .news-meta {
-        font-size: 0.85rem;
-    }
-    
-    .card-title {
-        font-size: 1.1rem;
-    }
-}
-
-/* Dark mode compatibility */
 body.dark-mode .news-card {
     background-color: var(--dark-card-bg);
     border-color: var(--dark-border);
 }
 
 body.dark-mode .news-card:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .news-title-link {
@@ -534,11 +442,322 @@ body.dark-mode .news-img-container {
     border-bottom: 1px solid var(--dark-border);
 }
 
-body.dark-mode .text-muted {
-    color: #adb5bd !important;
+body.dark-mode #siteLogo {
+    content: url('../img/white-logo.png');
 }
 
-/* Ensure badge colors work in dark mode */
+body.dark-mode .our-btn-outline {
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .our-btn-outline:hover {
+    background-color: var(--dark-category-icon-bg);
+}
+
 body.dark-mode .badge {
-    opacity: 0.9;
+    opacity: 1;
+}
+
+body.dark-mode .category-badge {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .news-card .card-title {
+    color: #ffffff;
+}
+
+body.dark-mode .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.dark-mode .news-stats {
+    color: #e0e0e0;
+}
+
+body.dark-mode .fa-heart, 
+body.dark-mode .fa-comment {
+    color: #adb5bd;
+}
+
+body.dark-mode .fa-heart.fas {
+    color: #e74c3c !important;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #8a8a8a;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+    cursor: pointer;
+}
+
+.dark-mode-toggle i {
+    transition: transform 0.5s ease;
+}
+
+.dark-mode-toggle:hover i {
+    transform: rotate(30deg);
+}
+
+/* Responsive styles */
+@media (max-width: 991.98px) {
+    .news-img-container {
+        height: 180px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .custom-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+    
+    .category-card {
+        padding: 15px 5px;
+    }
+    
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 0.9rem;
+    }
+    
+    .news-img-container {
+        height: 220px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .news-img-container {
+        height: 200px;
+    }
+    
+    .news-meta {
+        font-size: 0.85rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Marketplace specific styles - add these to your existing style.css file */
+
+/* Featured product styles */
+.featured-product {
+    margin-bottom: 30px;
+}
+
+.featured-img-container {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-img-container img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Product card styles */
+.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-img-container {
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    font-size: 0.7rem;
+    padding: 0.25em 0.6em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.wishlist-btn:hover {
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.wishlist-btn .fa-heart {
+    color: #777;
+}
+
+.wishlist-btn .fa-heart.fas {
+    color: #e74c3c;
+}
+
+.product-category {
+    color: #777;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.product-title-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.product-title-link:hover .card-title {
+    color: var(--primary-color);
+}
+
+.card-title {
+    font-size: 1rem;
+    transition: color 0.2s ease;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.product-price {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.product-meta {
+    margin-top: 8px;
+    font-size: 0.8rem;
+}
+
+/* Dark mode compatibility for marketplace page */
+body.dark-mode .product-card {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .product-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .product-category {
+    color: #adb5bd;
+}
+
+body.dark-mode .card-title {
+    color: var(--dark-text);
+}
+
+body.dark-mode .wishlist-btn {
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+body.dark-mode .wishlist-btn:hover {
+    background-color: var(--dark-card-bg);
+}
+
+body.dark-mode .wishlist-btn .fa-heart {
+    color: #adb5bd;
+}
+
+body.dark-mode .wishlist-btn .fa-heart.fas {
+    color: #e74c3c;
+}
+
+body.dark-mode .featured-product .card {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+/* Responsive adjustments for marketplace */
+@media (max-width: 991.98px) {
+    .product-img-container {
+        height: 150px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .featured-img-container {
+        height: 200px;
+    }
+    
+    .product-img-container {
+        height: 140px;
+    }
+    
+    .card-title {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .product-img-container {
+        height: 130px;
+    }
+    
+    .product-meta {
+        font-size: 0.75rem;
+    }
 }
