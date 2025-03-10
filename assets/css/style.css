@@ -803,3 +803,13 @@ body.dark-mode .featured-product .card {
         font-size: 0.75rem;
     }
 }
+
+
+
+
+
+
+body.dark-mode .nav-item.active i {
+    color: #00adef;
+}
+
