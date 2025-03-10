@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - Phonebook</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item logo-container">
+                    <a href="index.html">
+                        <img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+                    </a>
+                </li>
+                <li class="nav-item active"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+                <li class="nav-item"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+                <li class="nav-item"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+                <li class="nav-item"><a href="profile.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main container -->
+    <div class="custom-container">
+        <!-- Filter section for phonebook -->
+        <div class="filter-section my-1">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100 no-overflow" id="addContactButton" title="Create a Contact">
+                            <i class="fas fa-user-plus me-2"></i><span class="button-text">Contact</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3" id="categoryContainer">
+                        <select class="form-select" id="categorySelect">
+                            <option value="" selected>Select Category</option>
+                            <option value="education">Education</option>
+                            <option value="health">Health</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="food">Food & Restaurant</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="services">Services</option>
+                            <option value="government">Government</option>
+                            <option value="friends">Friends & Family</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3" id="searchContainer">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Contacts" id="searchInput">
+                            <button class="btn our-btn-outline" type="button" id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Subcategory Scrollable Menu (initially hidden) -->
+        <div class="subcategory-container" id="subcategoryContainer">
+            <!-- Subcategories will be loaded dynamically by JavaScript -->
+        </div>
+        
+        <!-- Contact List -->
+        <div class="contact-list my-3">
+            <!-- Contact 1 -->
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="contact-img" alt="MD Badol">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">MD Badol</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-user-tag"></i> সাধারণ ব্যবহারকারী
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> F2,Islamiya Bazar Road</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact 2 -->
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" class="contact-img" alt="Test">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">Test</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-user-tag"></i> সাধারণ ব্যবহারকারী
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 3/8.01768603251</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact 3 -->
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <img src="https://randomuser.me/api/portraits/women/56.jpg" class="contact-img" alt="Mohammad Shahriar">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">Mohammad Shahriar</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-user-tag"></i> সাধারণ ব্যবহারকারী
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 01,Mohammad Shahriar</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Educational Contacts -->
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" class="contact-img" alt="ABC School">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">ABC School</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-school"></i> Education - School
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 123 Education Road, City</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Health Contacts -->
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <img src="https://randomuser.me/api/portraits/women/57.jpg" class="contact-img" alt="City Hospital">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">City Hospital</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-hospital"></i> Health - Hospital
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 456 Health Avenue, City</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <img src="https://randomuser.me/api/portraits/women/50.jpg" class="contact-img" alt="Dr. Ahmed">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">Dr. Ahmed</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-user-md"></i> Health - Doctor
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> City Hospital, 3rd Floor</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary px-4" id="loadMoreButton">
+                    Load More <i class="fas fa-chevron-down ms-1"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer with Dropdown Submenu -->
+        <footer>
+            <div class="footer-div">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="more-link">More</a>
+                        <div class="dropdown-menu">
+                            <a href="admin-login.html">Admin</a>
+                            <a href="ad.html">Ad</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Subcategory data for phonebook with education and health categories
+        const subcategories = {
+            education: ['School', 'College', 'University', 'Coaching Center', 'Library', 'Training Institute'],
+            health: ['Hospital', 'Doctor', 'Diagnostic Center', 'Pharmacy', 'Clinic', 'Ambulance'],
+            emergency: ['Police', 'Fire Service', 'Ambulance', 'Disaster Management', 'Helpline'],
+            food: ['Restaurant', 'Cafe', 'Fast Food', 'Bakery', 'Catering', 'Food Delivery'],
+            shopping: ['Supermarket', 'Mall', 'Electronics', 'Clothing', 'Grocery', 'Furniture'],
+            services: ['Electrician', 'Plumber', 'Carpenter', 'Cleaning', 'Internet', 'Delivery'],
+            government: ['City Corporation', 'Passport Office', 'Tax Office', 'Post Office', 'Court'],
+            friends: ['Family', 'Close Friends', 'Relatives', 'Colleagues', 'Neighbors']
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize subcategory menu
+            const categorySelect = document.getElementById('categorySelect');
+            const subcategoryContainer = document.getElementById('subcategoryContainer');
+            
+            categorySelect.addEventListener('change', function() {
+                const selectedCategory = this.value;
+                
+                // Clear existing subcategories
+                subcategoryContainer.innerHTML = '';
+                
+                if (selectedCategory && subcategories[selectedCategory]) {
+                    // Show container
+                    subcategoryContainer.style.display = 'block';
+                    
+                    // Add "All" option
+                    const allOption = document.createElement('div');
+                    allOption.className = 'subcategory-option active';
+                    allOption.textContent = 'All ' + capitalizeFirstLetter(selectedCategory);
+                    allOption.setAttribute('data-subcategory', 'all');
+                    subcategoryContainer.appendChild(allOption);
+                    
+                    // Add subcategory options
+                    subcategories[selectedCategory].forEach(subcategory => {
+                        const option = document.createElement('div');
+                        option.className = 'subcategory-option';
+                        option.textContent = subcategory;
+                        option.setAttribute('data-subcategory', subcategory.toLowerCase().replace(/\s+/g, '-'));
+                        subcategoryContainer.appendChild(option);
+                    });
+                    
+                    // Add event listeners
+                    const subcategoryOptions = document.querySelectorAll('.subcategory-option');
+                    subcategoryOptions.forEach(option => {
+                        option.addEventListener('click', function() {
+                            subcategoryOptions.forEach(opt => opt.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            // Filter contacts based on selected subcategory
+                            const selectedSubcategory = this.getAttribute('data-subcategory');
+                            filterContactsBySubcategory(selectedCategory, selectedSubcategory);
+                        });
+                    });
+                } else {
+                    // Hide container if no category selected
+                    subcategoryContainer.style.display = 'none';
+                    
+                    // Show all contacts if no category is selected
+                    showAllContacts();
+                }
+            });
+            
+            // Add Contact button functionality
+            const addContactButton = document.getElementById('addContactButton');
+            if (addContactButton) {
+                addContactButton.addEventListener('click', function() {
+                    alert('Add New Contact form would open here');
+                });
+            }
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            
+            if (searchButton && searchInput) {
+                searchButton.addEventListener('click', function() {
+                    const searchTerm = searchInput.value.trim().toLowerCase();
+                    searchContacts(searchTerm);
+                });
+                
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const searchTerm = this.value.trim().toLowerCase();
+                        searchContacts(searchTerm);
+                    }
+                });
+            }
+            
+            // Load More button functionality
+            const loadMoreButton = document.getElementById('loadMoreButton');
+            if (loadMoreButton) {
+                loadMoreButton.addEventListener('click', function() {
+                    loadMoreButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+                    loadMoreButton.disabled = true;
+                    
+                    // Simulate loading more contacts
+                    setTimeout(() => {
+                        loadMoreButton.innerHTML = 'Load More <i class="fas fa-chevron-down ms-1"></i>';
+                        loadMoreButton.disabled = false;
+                        
+                        alert('In a real implementation, more contacts would be loaded here');
+                    }, 1500);
+                });
+            }
+            
+            // Helper functions
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+            
+            function filterContactsBySubcategory(category, subcategory) {
+                const contacts = document.querySelectorAll('.contact-card');
+                
+                contacts.forEach(contact => {
+                    const contactCategory = contact.querySelector('.contact-category').textContent.toLowerCase();
+                    
+                    if (subcategory === 'all') {
+                        // Show all contacts for this category
+                        if (contactCategory.includes(category.toLowerCase())) {
+                            contact.style.display = 'block';
+                        } else {
+                            contact.style.display = 'none';
+                        }
+                    } else {
+                        // Show only contacts matching the subcategory
+                        if (contactCategory.includes(subcategory.toLowerCase())) {
+                            contact.style.display = 'block';
+                        } else {
+                            contact.style.display = 'none';
+                        }
+                    }
+                });
+            }
+            
+            function showAllContacts() {
+                const contacts = document.querySelectorAll('.contact-card');
+                contacts.forEach(contact => {
+                    contact.style.display = 'block';
+                });
+            }
+            
+            function searchContacts(term) {
+                if (!term) {
+                    showAllContacts();
+                    return;
+                }
+                
+                const contacts = document.querySelectorAll('.contact-card');
+                
+                contacts.forEach(contact => {
+                    const contactName = contact.querySelector('.contact-name').textContent.toLowerCase();
+                    const contactInfo = contact.querySelector('.contact-info').textContent.toLowerCase();
+                    const contactCategory = contact.querySelector('.contact-category').textContent.toLowerCase();
+                    
+                    if (contactName.includes(term) || contactInfo.includes(term) || contactCategory.includes(term)) {
+                        contact.style.display = 'block';
+                    } else {
+                        contact.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1091,3 +1091,53 @@ document.addEventListener('DOMContentLoaded', function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 });
+
+
+// code for add asset button 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to adjust text based on available width
+    function adjustButtonText() {
+        const buttons = document.querySelectorAll('.no-overflow');
+        
+        buttons.forEach(button => {
+            const textSpan = button.querySelector('.button-text');
+            if (!textSpan) return;
+            
+            const fullText = textSpan.getAttribute('data-full-text') || textSpan.textContent;
+            
+            // Store the original text if not already stored
+            if (!textSpan.getAttribute('data-full-text')) {
+                textSpan.setAttribute('data-full-text', fullText);
+            }
+            
+            // Get available width for text
+            const buttonWidth = button.offsetWidth;
+            const iconWidth = 25; // Approximate width of icon + margin
+            const availableWidth = buttonWidth - iconWidth;
+            
+            // Calculate characters that can fit (approximation)
+            // Assuming average character width is about 8px for a typical font
+            const fontSizeComputed = window.getComputedStyle(textSpan).fontSize;
+            const fontSize = parseFloat(fontSizeComputed);
+            const charWidth = fontSize * 0.6; // Approximate character width
+            
+            const maxChars = Math.floor(availableWidth / charWidth);
+            
+            // Adjust text content
+            if (maxChars >= fullText.length) {
+                textSpan.textContent = fullText;
+            } else if (maxChars > 0) {
+                textSpan.textContent = fullText.substring(0, maxChars);
+            } else {
+                textSpan.textContent = ''; // Hide text completely if no space
+            }
+        });
+    }
+    
+    // Run on load
+    adjustButtonText();
+    
+    // Run on window resize
+    window.addEventListener('resize', adjustButtonText);
+});
