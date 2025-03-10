@@ -1017,3 +1017,77 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+// code for subcategory
+
+ // Subcategory data structure - you can modify this based on your needs
+ const subcategories = {
+    electronics: ['Smartphones', 'Laptops', 'Tablets', 'Audio', 'Cameras', 'Accessories', 'TVs', 'Gaming'],
+    clothing: ['Men', 'Women', 'Kids', 'Shoes', 'Accessories', 'Sports Wear', 'Seasonal', 'Ethnic Wear'],
+    home: ['Kitchen', 'Furniture', 'Decor', 'Bedding', 'Bath', 'Storage', 'Lighting', 'Gardening'],
+    toys: ['Action Figures', 'Dolls', 'Educational', 'Outdoor', 'Board Games', 'Puzzles', 'Remote Control', 'Arts & Crafts'],
+    sports: ['Fitness', 'Outdoor', 'Team Sports', 'Water Sports', 'Winter Sports', 'Cycling', 'Camping', 'Sportswear'],
+    books: ['Fiction', 'Non-Fiction', 'Educational', 'Comics', 'Children', 'Biography', 'Self-Help', 'Cooking'],
+    health: ['Skincare', 'Makeup', 'Haircare', 'Fragrance', 'Personal Care', 'Healthcare', 'Bath & Body', 'Supplements'],
+    automotive: ['Car Parts', 'Accessories', 'Tools', 'Tires', 'Electronics', 'Motorcycle', 'Car Care', 'Oils & Fluids'],
+    services: ['Home Services', 'Professional', 'Transportation', 'Freelance', 'Education', 'Health', 'Tech Support', 'Events'],
+    jobs: ['Full-time', 'Part-time', 'Remote', 'Freelance', 'Internship', 'Entry Level', 'Senior Level', 'Temporary']
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const categorySelect = document.getElementById('categorySelect');
+    const subcategoryContainer = document.getElementById('subcategoryContainer');
+    
+    // Event listener for category selection
+    categorySelect.addEventListener('change', function() {
+        const selectedCategory = this.value;
+        
+        // Clear any existing subcategories
+        subcategoryContainer.innerHTML = '';
+        
+        // If a category is selected, show the subcategory menu
+        if (selectedCategory && subcategories[selectedCategory]) {
+            // Show the container
+            subcategoryContainer.style.display = 'block';
+            
+            // Add "All" option first
+            const allOption = document.createElement('div');
+            allOption.className = 'subcategory-option active';
+            allOption.textContent = 'All ' + capitalizeFirstLetter(selectedCategory);
+            allOption.setAttribute('data-subcategory', 'all');
+            subcategoryContainer.appendChild(allOption);
+            
+            // Add subcategory options
+            subcategories[selectedCategory].forEach(subcategory => {
+                const option = document.createElement('div');
+                option.className = 'subcategory-option';
+                option.textContent = subcategory;
+                option.setAttribute('data-subcategory', subcategory.toLowerCase());
+                subcategoryContainer.appendChild(option);
+            });
+            
+            // Add event listeners to subcategory options
+            const subcategoryOptions = document.querySelectorAll('.subcategory-option');
+            subcategoryOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    subcategoryOptions.forEach(opt => opt.classList.remove('active'));
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Here you would add filtering logic based on the selected subcategory
+                    console.log('Selected subcategory:', this.getAttribute('data-subcategory'));
+                });
+            });
+        } else {
+            // Hide the container if no category is selected
+            subcategoryContainer.style.display = 'none';
+        }
+    });
+    
+    // Helper function to capitalize first letter
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+});
