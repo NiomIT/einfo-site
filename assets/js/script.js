@@ -1309,6 +1309,314 @@ function disableDarkMode() {
     }
 }
 
+// code for forgot password page 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // OTP input elements
+    const otpInputs = [
+        document.getElementById('otp1'),
+        document.getElementById('otp2'),
+        document.getElementById('otp3'),
+        document.getElementById('otp4'),
+        document.getElementById('otp5'),
+        document.getElementById('otp6')
+    ];
+    const verifyButton = document.getElementById('verifyButton');
+    const resendButton = document.getElementById('resendButton');
+    const resendTimer = document.getElementById('resendTimer');
+    const errorMessage = document.getElementById('errorMessage');
+    const body = document.body;
+    
+    let resendCountdown = 30;
+    let resendTimerId;
+    
+    // Check for saved dark mode preference and apply it
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+    }
+    
+    // Start initial resend timer
+    startResendTimer();
+    
+    // Handle OTP input functionality
+    otpInputs.forEach((input, index) => {
+        // Auto-focus to next input
+        input.addEventListener('input', function() {
+            if (this.value.length === this.maxLength) {
+                // Move to next input if exists
+                if (otpInputs[index + 1]) {
+                    otpInputs[index + 1].focus();
+                }
+            }
+            
+            // Check if all inputs are filled
+            checkVerifyButtonState();
+        });
+        
+        // Handle backspace
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '') {
+                // Move to previous input if exists
+                if (otpInputs[index - 1]) {
+                    otpInputs[index - 1].focus();
+                }
+            }
+        });
+        
+        // Allow only numbers
+        input.addEventListener('keypress', function(e) {
+            // Allow only 0-9
+            if (e.key < '0' || e.key > '9') {
+                e.preventDefault();
+            }
+        });
+        
+        // Also handle paste events
+        input.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const paste = e.clipboardData.getData('text');
+            
+            // Check if paste is numeric
+            if (/^\d+$/.test(paste)) {
+                // Fill all inputs with pasted value
+                for (let i = 0; i < Math.min(paste.length, otpInputs.length); i++) {
+                    otpInputs[i].value = paste[i];
+                }
+                
+                // Focus last filled input or last input
+                const lastFilledIndex = Math.min(paste.length - 1, otpInputs.length - 1);
+                otpInputs[lastFilledIndex].focus();
+                
+                // Check if verify button should be enabled
+                checkVerifyButtonState();
+            }
+        });
+    });
+    
+    // Check if all OTP inputs are filled
+    function checkVerifyButtonState() {
+        const allFilled = otpInputs.every(input => input.value.length === 1);
+        verifyButton.disabled = !allFilled;
+    }
+    
+    // Start resend timer
+    function startResendTimer() {
+        resendCountdown = 30;
+        resendButton.disabled = true;
+        
+        resendTimerId = setInterval(function() {
+            resendCountdown--;
+            resendTimer.textContent = `(${resendCountdown}s)`;
+            
+            if (resendCountdown <= 0) {
+                clearInterval(resendTimerId);
+                resendButton.disabled = false;
+                resendTimer.textContent = '';
+            }
+        }, 1000);
+    }
+    
+    // Verify button click
+    verifyButton.addEventListener('click', function() {
+        // Get OTP code
+        let otpCode = '';
+        otpInputs.forEach(input => {
+            otpCode += input.value;
+        });
+        
+        // For demo purposes: 123456 is considered valid
+        if (otpCode === '123456') {
+            // Successful verification - redirect to next page
+            window.location.href = 'account.html';
+        } else {
+            // Show error message
+            errorMessage.style.display = 'block';
+            
+            // Shake effect for error
+            otpInputs.forEach(input => {
+                input.style.borderColor = '#dc3545';
+                setTimeout(() => {
+                    input.style.borderColor = body.classList.contains('dark-mode') ? '#333' : '#ced4da';
+                }, 1500);
+            });
+        }
+    });
+    
+    // Resend button click
+    resendButton.addEventListener('click', function() {
+        // Clear all inputs
+        otpInputs.forEach(input => {
+            input.value = '';
+        });
+        
+        // Disable verify button
+        verifyButton.disabled = true;
+        
+        // Hide error message
+        errorMessage.style.display = 'none';
+        
+        // Show success message for resend
+        alert('New OTP code has been sent to your phone.');
+        
+        // Restart timer
+        startResendTimer();
+        
+        // Focus first input
+        otpInputs[0].focus();
+    });
+
+    // Navigation bar hide/show on scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('mainNav');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down
+            nav.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            nav.style.transform = 'translateY(0)';
+        }
+        lastScrollTop = scrollTop;
+    });
+});
+
+// Dropdown functionality for More link in footer
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.dropdown .more-link');
+    const dropdown = document.querySelector('.dropdown');
+    
+    // Toggle dropdown on click
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+});
+
+
+// code for change password page 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const body = document.body;
+    const changePasswordButton = document.getElementById('changePasswordButton');
+    const newPassword = document.getElementById('newPassword');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const newPasswordToggle = document.getElementById('newPasswordToggle');
+    const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+    
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+    }
+    
+    // Toggle new password visibility
+    newPasswordToggle.addEventListener('click', function() {
+        const type = newPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        newPassword.setAttribute('type', type);
+        
+        // Toggle eye icon
+        if (type === 'text') {
+            newPasswordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+        } else {
+            newPasswordToggle.innerHTML = '<i class="far fa-eye"></i>';
+        }
+    });
+    
+    // Toggle confirm password visibility
+    confirmPasswordToggle.addEventListener('click', function() {
+        const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPassword.setAttribute('type', type);
+        
+        // Toggle eye icon
+        if (type === 'text') {
+            confirmPasswordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+        } else {
+            confirmPasswordToggle.innerHTML = '<i class="far fa-eye"></i>';
+        }
+    });
+    
+    // Change password button functionality
+    changePasswordButton.addEventListener('click', function() {
+        // Hide any previous messages
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'none';
+        
+        // Check if passwords match
+        if (newPassword.value === confirmPassword.value) {
+            if (newPassword.value.length < 6) {
+                // Password is too short
+                errorMessage.textContent = 'Password must be at least 6 characters long.';
+                errorMessage.style.display = 'block';
+            } else {
+                // Successful password change
+                successMessage.style.display = 'block';
+                
+                // Clear the form
+                newPassword.value = '';
+                confirmPassword.value = '';
+                
+                // Redirect after 2 seconds
+                setTimeout(function() {
+                    window.location.href = 'account.html';
+                }, 2000);
+            }
+        } else {
+            // Passwords don't match
+            errorMessage.textContent = 'Passwords do not match. Please try again.';
+            errorMessage.style.display = 'block';
+        }
+    });
+    
+    // Allow Enter key to trigger password change
+    confirmPassword.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            changePasswordButton.click();
+        }
+    });
+});
+
+window.addEventListener('scroll', function() {
+    const nav = document.getElementById('mainNav');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        nav.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up
+        nav.style.transform = 'translateY(0)';
+    }
+    lastScrollTop = scrollTop;
+});
+
+// Dropdown functionality for More link in footer
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.dropdown .more-link');
+    const dropdown = document.querySelector('.dropdown');
+    
+    // Toggle dropdown on click
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+});
 
 
 
@@ -1317,3 +1625,89 @@ function disableDarkMode() {
 
 
 
+
+// login page code
+document.addEventListener('DOMContentLoaded', function() {
+    const body = document.body;
+    const loginButton = document.getElementById('loginButton');
+    const password = document.getElementById('password');
+    const errorMessage = document.getElementById('errorMessage');
+    const forgotPassword = document.getElementById('forgotPassword');
+    const passwordToggle = document.getElementById('passwordToggle');
+    
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+    }
+    
+    // Toggle password visibility
+    passwordToggle.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Toggle eye icon
+        if (type === 'text') {
+            passwordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+        } else {
+            passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
+        }
+    });
+    
+    // Login button functionality
+    loginButton.addEventListener('click', function() {
+        // For demo purposes, any password other than "demo123" is considered incorrect
+        if (password.value === "demo123") {
+            // Successful login - redirect to account page
+            window.location.href = 'account.html';
+        } else {
+            // Show error message and forgot password link
+            errorMessage.style.display = 'block';
+            forgotPassword.style.display = 'block';
+        }
+    });
+    
+    // Allow Enter key to trigger login
+    password.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            loginButton.click();
+        }
+    });
+    
+    // Forgot password functionality
+    forgotPassword.addEventListener('click', function() {
+        alert('A password reset link will be sent to your registered phone number.');
+    });
+});
+
+window.addEventListener('scroll', function() {
+    const nav = document.getElementById('mainNav');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        nav.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up
+        nav.style.transform = 'translateY(0)';
+    }
+    lastScrollTop = scrollTop;
+});
+
+// Dropdown functionality for More link in footer
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.dropdown .more-link');
+    const dropdown = document.querySelector('.dropdown');
+    
+    // Toggle dropdown on click
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+});
