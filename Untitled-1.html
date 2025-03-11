@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+<title>News Details - eINFO</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.news-header {
+position: relative;
+margin-bottom: 20px;
+}
+.news-title {
+font-size: 2.5rem;
+font-weight: 700;
+line-height: 1.2;
+margin-bottom: 15px;
+}
+.news-meta-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+.news-category {
+font-weight: 600;
+color: var(--primary-color);
+display: flex;
+align-items: center;
+}
+.news-category i {
+margin-right: 8px;
+}
+.news-time {
+color: #6c757d;
+display: flex;
+align-items: center;
+}
+.news-time i {
+margin-right: 8px;
+}
+.news-featured-image {
+position: relative;
+margin-bottom: 25px;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.news-featured-image img {
+width: 100%;
+height: 500px;
+object-fit: cover;
+transition: transform 0.3s ease;
+}
+.news-featured-image:hover img {
+transform: scale(1.05);
+}
+.news-content {
+font-size: 1.1rem;
+line-height: 1.8;
+color: #333;
+}
+body.dark-mode .news-content {
+color: #e0e0e0;
+}
+.social-interaction {
+border-top: 1px solid #dee2e6;
+border-bottom: 1px solid #dee2e6;
+padding: 15px 0;
+margin: 25px 0;
+}
+.comments-section {
+background-color: #f8f9fa;
+padding: 25px;
+border-radius: 12px;
+}
+body.dark-mode .comments-section {
+background-color: #1e1e1e;
+}
+.comment {
+background-color: white;
+border-radius: 8px;
+padding: 15px;
+margin-bottom: 15px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+body.dark-mode .comment {
+background-color: #2a2a2a;
+color: #e0e0e0;
+}
+.related-news .news-card {
+transition: all 0.3s ease;
+}
+.related-news .news-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+.toast-notification {
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+background-color: rgba(0,0,0,0.8);
+color: white;
+padding: 10px 20px;
+border-radius: 5px;
+z-index: 1000;
+}
+</style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="custom-nav shadow-sm" id="mainNav">
+<div class="custom-container">
+<ul class="nav-list">
+<li class="nav-item logo-container">
+<a href="index.html">
+<img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+</a>
+</li>
+<li class="nav-item"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+<li class="nav-item active"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+<li class="nav-item"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+<li class="nav-item"><a href="account.html"><i class="fas fa-user"></i></a></li>
+</ul>
+</div>
+</nav>
+
+<!-- News Details Container -->
+<div class="custom-container mt-4">
+<!-- Back Button -->
+<div class="mb-4">
+<a href="newsfeed.html" class="btn btn-outline-primary">
+<i class="fas fa-arrow-left me-2"></i>Back to News
+</a>
+</div>
+
+<!-- News Article -->
+<article class="news-details-article">
+<!-- Header Section -->
+<header class="news-header">
+<h1 class="news-title">Local Community Center Opens After Extensive Renovation</h1>
+
+<div class="news-meta-container">
+<div class="news-category">
+<i class="fas fa-tag"></i>
+Local News
+</div>
+<div class="news-time">
+<i class="fas fa-clock"></i>
+2 hours ago
+</div>
+</div>
+</header>
+
+<!-- Featured Image -->
+<figure class="news-featured-image">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXxfn1j1vKFy8yJeBGl2AS6Dcah-lKgHofg&s" 
+alt="Community Center Renovation" 
+class="img-fluid">
+</figure>
+
+<!-- Article Content -->
+<div class="news-content">
+<p>In a significant milestone for our local community, the long-awaited community center has finally reopened its doors after an extensive renovation project. The renovation, which took six months to complete, has transformed the aging facility into a modern, welcoming space for residents of all ages.</p>
+
+<p>The community center, located in the heart of downtown, has been a cornerstone of local social activities for decades. The recent renovation aims to breathe new life into this beloved institution, offering improved facilities and expanded services.</p>
+
+<h3 class="mt-4">Key Improvements</h3>
+<ul>
+<li>State-of-the-art multipurpose hall</li>
+<li>Updated children's play area</li>
+<li>Modern computer and technology center</li>
+<li>Accessible design for seniors and people with disabilities</li>
+<li>Energy-efficient lighting and solar panels</li>
+</ul>
+
+<p>Local Mayor Emma Rodriguez cut the ribbon at the grand reopening ceremony, emphasizing the center's importance. "This renovation represents our commitment to creating spaces that bring our community together," she stated.</p>
+
+<p>Community members have already begun booking spaces for various activities, from youth programs to senior fitness classes and local workshops.</p>
+</div>
+
+<!-- Social Interaction Section -->
+<div class="social-interaction d-flex justify-content-between align-items-center">
+<div class="d-flex">
+<button class="btn btn-outline-primary me-2" id="likeButton">
+<i class="far fa-heart me-1"></i>Like <span class="like-count">(24)</span>
+</button>
+<button class="btn btn-outline-secondary" id="shareButton">
+<i class="fas fa-share-alt me-1"></i>Share
+</button>
+</div>
+<div>
+<button class="btn btn-outline-secondary" id="bookmarkButton">
+<i class="far fa-bookmark me-1"></i>Bookmark
+</button>
+</div>
+</div>
+
+<!-- Comments Section -->
+<div class="comments-section mt-4">
+<h4 class="mb-4">Comments (8)</h4>
+
+<!-- Comment Form -->
+<div class="comment-form mb-4">
+<div class="d-flex align-items-center mb-3">
+<img src="https://randomuser.me/api/portraits/women/44.jpg" 
+     alt="User Avatar" 
+     class="rounded-circle me-3" 
+     style="width: 50px; height: 50px; object-fit: cover;">
+<textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+</div>
+<button class="btn btn-primary">Post Comment</button>
+</div>
+
+<!-- Existing Comments -->
+<div class="comments">
+<!-- Comment 1 -->
+<div class="comment">
+<div class="d-flex align-items-center mb-3">
+    <img src="https://randomuser.me/api/portraits/men/41.jpg" 
+         alt="Commenter" 
+         class="rounded-circle me-3" 
+         style="width: 40px; height: 40px; object-fit: cover;">
+    <div>
+        <h6 class="mb-1">Michael Chen</h6>
+        <small class="text-muted">1 hour ago</small>
+    </div>
+</div>
+<p class="mb-3">This is fantastic! Our community really needed this upgrade.</p>
+<div class="comment-actions d-flex justify-content-between">
+    <div>
+        <button class="btn btn-sm btn-outline-secondary me-2 like-comment">
+            <i class="far fa-heart me-1"></i>Like
+        </button>
+        <button class="btn btn-sm btn-outline-secondary reply-comment">
+            <i class="far fa-comment me-1"></i>Reply
+        </button>
+    </div>
+    <small class="text-muted comment-likes">2 likes</small>
+</div>
+</div>
+
+<!-- Comment 2 -->
+<div class="comment">
+<div class="d-flex align-items-center mb-3">
+    <img src="https://randomuser.me/api/portraits/women/50.jpg" 
+         alt="Commenter" 
+         class="rounded-circle me-3" 
+         style="width: 40px; height: 40px; object-fit: cover;">
+    <div>
+        <h6 class="mb-1">Sarah Thompson</h6>
+        <small class="text-muted">30 minutes ago</small>
+    </div>
+</div>
+<p class="mb-3">Can't wait to check out the new computer center!</p>
+<div class="comment-actions d-flex justify-content-between">
+    <div>
+        <button class="btn btn-sm btn-outline-secondary me-2 like-comment">
+            <i class="far fa-heart me-1"></i>Like
+        </button>
+        <button class="btn btn-sm btn-outline-secondary reply-comment">
+            <i class="far fa-comment me-1"></i>Reply
+        </button>
+    </div>
+    <small class="text-muted comment-likes">1 like</small>
+</div>
+</div>
+</div>
+</div>
+</article>
+
+<!-- Related News Section -->
+<section class="related-news mt-5">
+<h3 class="mb-4">Related News</h3>
+<div class="row">
+<div class="col-md-4 mb-3">
+<div class="card news-card h-100">
+<div class="news-img-container">
+    <img src="https://images.pexels.com/photos/3680219/pexels-photo-3680219.jpeg" 
+         class="card-img-top news-img" alt="Technology Park">
+    <span class="category-badge badge bg-info">Local</span>
+</div>
+<div class="card-body">
+    <a href="#" class="news-title-link">
+        <h5 class="card-title">New Technology Park to Create 500 Jobs</h5>
+    </a>
+    <div class="news-meta">
+        <small class="text-muted"><i class="fas fa-clock me-1"></i> 5 hours ago</small>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-3">
+<div class="card news-card h-100">
+<div class="news-img-container">
+    <img src="https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp" 
+         class="card-img-top news-img" alt="Sports Team">
+    <span class="category-badge badge bg-success">Sports</span>
+</div>
+<div class="card-body">
+    <a href="#" class="news-title-link">
+        <h5 class="card-title">Local Sports Team Advances to Finals</h5>
+    </a>
+    <div class="news-meta">
+        <small class="text-muted"><i class="fas fa-clock me-1"></i> 12 hours ago</small>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-3">
+<div class="card news-card h-100">
+<div class="news-img-container">
+    <img src="https://media.istockphoto.com/id/843408508/photo/photography-camera-lens-concept.jpg" 
+         class="card-img-top news-img" alt="Health Clinic">
+    <span class="category-badge badge bg-danger">Health</span>
+</div>
+<div class="card-body">
+    <a href="#" class="news-title-link">
+        <h5 class="card-title">New Health Clinic Opens in Downtown</h5>
+    </a>
+    <div class="news-meta">
+        <small class="text-muted"><i class="fas fa-clock me-1"></i> 1 day ago</small>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Footer -->
+<footer>
+<div class="footer-div">
+<ul>
+<li><a href="#">About</a></li>
+<li><a href="#">Terms</a></li>
+<li><a href="#">Privacy</a></li>
+<li class="dropdown">
+<a href="#" class="more-link">More</a>
+<div class="dropdown-menu">
+<a href="admin-login.html">Admin</a>
+<a href="ad.html">Ad</a>
+</div>
+</li>
+</ul>
+</div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Utility Functions
+function showToast(message) {
+// Remove any existing toasts
+const existingToast = document.querySelector('.toast-notification');
+if (existingToast) {
+existingToast.remove();
+}
+
+// Create toast element
+const toast = document.createElement('div');
+toast.className = 'toast-notification';
+toast.textContent = message;
+
+// Style the toast
+toast.style.position = 'fixed';
+toast.style.bottom = '20px';
+toast.style.left = '50%';
+toast.style.transform = 'translateX(-50%)';
+toast.style.backgroundColor = 'rgba(0,0,0,0.8)';
+toast.style.color = 'white';
+toast.style.padding = '10px 20px';
+toast.style.borderRadius = '5px';
+toast.style.zIndex = '1000';
+
+// Add to body
+document.body.appendChild(toast);
+
+// Remove after 3 seconds
+setTimeout(() => {
+document.body.removeChild(toast);
+}, 3000);
+}
+
+function copyToClipboard(text) {
+const tempInput = document.createElement('input');
+tempInput.value = text;
+document.body.appendChild(tempInput);
+tempInput.select();
+document.execCommand('copy');
+document.body.removeChild(tempInput);
+}
+
+// Like Button Functionality
+const likeButton = document.getElementById('likeButton');
+const likeCount = document.querySelector('.like-count');
+
+likeButton.addEventListener('click', function() {
+const heartIcon = this.querySelector('i');
+let currentCount = parseInt(likeCount.textContent.replace(/[()]/g, ''));
+
+if (heartIcon.classList.contains('far')) {
+// Like the article
+heartIcon.classList.remove('far');
+heartIcon.classList.add('fas');
+heartIcon.style.color = '#e74c3c';
+likeCount.textContent = `(${currentCount + 1})`;
+showToast('Article liked');
+} else {
+// Unlike the article
+heartIcon.classList.remove('fas');
+heartIcon.classList.add('far');
+heartIcon.style.color = '';
+likeCount.textContent = `(${currentCount - 1})`;
+showToast('Article unliked');
+}
+});
+
+// Bookmark Button Functionality
+const bookmarkButton = document.getElementById('bookmarkButton');
+bookmarkButton.addEventListener('click', function() {
+const bookmarkIcon = this.querySelector('i');
+
+if (bookmarkIcon.classList.contains('far')) {
+// Bookmark the article
+bookmarkIcon.classList.remove('far');
+bookmarkIcon.classList.add('fas');
+showToast('Article bookmarked');
+} else {
+// Remove bookmark
+bookmarkIcon.classList.remove('fas');
+bookmarkIcon.classList.add('far');
+showToast('Bookmark removed');
+}
+});
+
+// Share Button Functionality
+const shareButton = document.getElementById('shareButton');
+shareButton.addEventListener('click', function() {
+const newsTitle = document.querySelector('.news-title').textContent;
+
+if (navigator.share) {
+navigator.share({
+title: newsTitle,
+text: 'Check out this interesting news article!',
+url: window.location.href
+}).catch(console.error);
+} else {
+// Fallback for browsers that don't support Web Share API
+copyToClipboard(window.location.href);
+showToast('Link copied to clipboard');
+}
+});
+
+// Comments Section
+const commentForm = document.querySelector('.comment-form');
+const commentTextarea = commentForm.querySelector('textarea');
+const postCommentButton = commentForm.querySelector('button');
+const commentsContainer = document.querySelector('.comments');
+const commentCountElement = document.querySelector('h4');
+
+postCommentButton.addEventListener('click', function() {
+const commentText = commentTextarea.value.trim();
+
+if (commentText) {
+// Create new comment element
+const newComment = document.createElement('div');
+newComment.className = 'comment';
+
+// Random user images for variety
+const randomUserImages = [
+'https://randomuser.me/api/portraits/women/60.jpg',
+'https://randomuser.me/api/portraits/men/60.jpg',
+'https://randomuser.me/api/portraits/women/65.jpg',
+'https://randomuser.me/api/portraits/men/65.jpg'
+];
+const randomImage = randomUserImages[Math.floor(Math.random() * randomUserImages.length)];
+
+newComment.innerHTML = `
+<div class="d-flex align-items-center mb-3">
+    <img src="${randomImage}" 
+         alt="Commenter" 
+         class="rounded-circle me-3" 
+         style="width: 40px; height: 40px; object-fit: cover;">
+    <div>
+        <h6 class="mb-1">You</h6>
+        <small class="text-muted">Just now</small>
+    </div>
+</div>
+<p class="mb-3">${commentText}</p>
+<div class="comment-actions d-flex justify-content-between">
+    <div>
+        <button class="btn btn-sm btn-outline-secondary me-2 like-comment">
+            <i class="far fa-heart me-1"></i>Like
+        </button>
+        <button class="btn btn-sm btn-outline-secondary reply-comment">
+            <i class="far fa-comment me-1"></i>Reply
+        </button>
+    </div>
+    <small class="text-muted comment-likes">0 likes</small>
+</div>
+`;
+
+// Add like functionality to new comment
+const likeCommentBtn = newComment.querySelector('.like-comment');
+const commentLikesElement = newComment.querySelector('.comment-likes');
+likeCommentBtn.addEventListener('click', function() {
+const heartIcon = this.querySelector('i');
+let currentLikes = parseInt(commentLikesElement.textContent);
+
+if (heartIcon.classList.contains('far')) {
+    heartIcon.classList.remove('far');
+    heartIcon.classList.add('fas');
+    heartIcon.style.color = '#e74c3c';
+    commentLikesElement.textContent = `${currentLikes + 1} likes`;
+} else {
+    heartIcon.classList.remove('fas');
+    heartIcon.classList.add('far');
+    heartIcon.style.color = '';
+    commentLikesElement.textContent = `${currentLikes - 1} likes`;
+}
+});
+
+// Add reply functionality
+const replyCommentBtn = newComment.querySelector('.reply-comment');
+replyCommentBtn.addEventListener('click', function() {
+showToast('Reply feature coming soon');
+});
+
+// Add new comment to comments section
+commentsContainer.appendChild(newComment);
+
+// Clear textarea
+commentTextarea.value = '';
+
+// Update comment count
+const currentCount = parseInt(commentCountElement.textContent.match(/\d+/)[0]);
+commentCountElement.textContent = `Comments (${currentCount + 1})`;
+
+showToast('Comment posted successfully');
+} else {
+showToast('Please write a comment before posting');
+}
+});
+
+// Related News Click Handling
+const relatedNewsLinks = document.querySelectorAll('.related-news .news-title-link');
+relatedNewsLinks.forEach(link => {
+link.addEventListener('click', function(e) {
+e.preventDefault();
+const newsTitle = this.querySelector('.card-title').textContent;
+showToast(`Opening details for: ${newsTitle}`);
+});
+});
+
+// Comment Likes Handling
+const commentLikeButtons = document.querySelectorAll('.like-comment');
+commentLikeButtons.forEach(button => {
+button.addEventListener('click', function() {
+const heartIcon = this.querySelector('i');
+const likesElement = this.closest('.comment-actions').querySelector('.comment-likes');
+let currentLikes = parseInt(likesElement.textContent);
+
+if (heartIcon.classList.contains('far')) {
+heartIcon.classList.remove('far');
+heartIcon.classList.add('fas');
+heartIcon.style.color = '#e74c3c';
+likesElement.textContent = `${currentLikes + 1} likes`;
+} else {
+heartIcon.classList.remove('fas');
+heartIcon.classList.add('far');
+heartIcon.style.color = '';
+likesElement.textContent = `${currentLikes - 1} likes`;
+}
+});
+});
+
+// Footer Dropdown
+const dropdownToggle = document.querySelector('.dropdown .more-link');
+const dropdown = document.querySelector('.dropdown');
+
+dropdownToggle.addEventListener('click', function(e) {
+e.preventDefault();
+dropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+if (!dropdown.contains(e.target)) {
+dropdown.classList.remove('active');
+}
+});
+
+// Dark Mode Functionality
+function enableDarkMode() {
+document.body.classList.add('dark-mode');
+localStorage.setItem('darkMode', 'enabled');
+updateLogoForDarkMode();
+updateDarkModeToggleIcon();
+}
+
+function disableDarkMode() {
+document.body.classList.remove('dark-mode');
+localStorage.setItem('darkMode', 'disabled');
+updateLogoForDarkMode();
+updateDarkModeToggleIcon();
+}
+
+function updateLogoForDarkMode() {
+const logo = document.getElementById('siteLogo');
+if (logo) {
+logo.src = document.body.classList.contains('dark-mode') 
+? 'assets/img/white-logo.png' 
+: 'assets/img/logo.png';
+}
+}
+
+function updateDarkModeToggleIcon() {
+const darkModeToggle = document.querySelector('.dark-mode-toggle-special');
+if (darkModeToggle) {
+const icon = darkModeToggle.querySelector('i');
+icon.className = document.body.classList.contains('dark-mode') 
+? 'fas fa-sun' 
+: 'fas fa-moon';
+}
+}
+
+// Check for saved dark mode preference
+const savedDarkMode = localStorage.getItem('darkMode');
+
+if (savedDarkMode === 'enabled' || 
+(savedDarkMode === null && window.matchMedia && 
+window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+enableDarkMode();
+}
+
+// Add dark mode toggle button
+const darkModeToggle = document.createElement('div');
+darkModeToggle.className = 'dark-mode-toggle-special';
+darkModeToggle.innerHTML = `<i class="fas ${document.body.classList.contains('dark-mode') ? 'fa-sun' : 'fa-moon'}"></i>`;
+
+darkModeToggle.addEventListener('click', function() {
+if (document.body.classList.contains('dark-mode')) {
+disableDarkMode();
+} else {
+enableDarkMode();
+}
+});
+</script>

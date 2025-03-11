@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
-    <title>News Details - eINFO</title>
+    <title>eINFO - News Article</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -12,9 +12,87 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Tab-style buttons */
+        .tab-buttons {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 15px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 3px solid #0d6efd;
+            color: #0d6efd;
+        }
+        
+        .tab-btn:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        
+        /* Title with edit button */
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .article-meta {
+            margin-bottom: 20px;
+        }
+        
+        /* Simple edit icon */
+        .edit-icon {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .edit-icon:hover {
+            color: #0d6efd;
+        }
+
+        /* Dark mode fixes for tab buttons */
+body.dark-mode .tab-buttons {
+    background-color: var(--dark-card-bg);
+    border-bottom: 1px solid var(--dark-border);
+}
+
+body.dark-mode .tab-btn {
+    color: var(--dark-text);
+}
+
+body.dark-mode .tab-btn.active {
+    border-bottom: 3px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .tab-btn:hover {
+    background-color: rgba(0, 173, 239, 0.1); /* Using primary color with opacity */
+}
+
+/* Make sure dark mode tabs transition smoothly */
+.tab-buttons {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tab-btn {
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="custom-nav shadow-sm" id="mainNav">
         <div class="custom-container">
             <ul class="nav-list">
@@ -30,218 +108,82 @@
             </ul>
         </div>
     </nav>
-
-    <!-- News Details Container -->
-    <div class="custom-container mt-4">
-        <!-- Back Button -->
-        <div class="mb-3">
-            <a href="newsfeed.html" class="btn btn-outline-primary">
-                <i class="fas fa-arrow-left me-2"></i>Back to News
-            </a>
+    
+    <div class="custom-container">
+        <!-- Tab-style buttons instead of filter-section -->
+        <div class="tab-buttons">
+            <button class="tab-btn" id="profileTab">
+                <i class="fas fa-user me-2"></i><span class="button-text">Profile</span>
+            </button>
+            <button class="tab-btn active" id="newsTab">
+                <i class="fas fa-newspaper me-2"></i><span class="button-text">News</span>
+            </button>
+            <button class="tab-btn" id="servicesTab">
+                <i class="fas fa-shopping-bag me-2"></i><span class="button-text">Services</span>
+            </button>
         </div>
 
-        <!-- News Article -->
-        <article class="news-details-article">
-            <!-- Header Section -->
-            <header class="mb-4">
-                <h1 class="news-title">Local Community Center Opens After Renovation</h1>
-                
-                <div class="news-meta d-flex justify-content-between align-items-center">
-                    <div class="author-info d-flex align-items-center">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="author-avatar rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                        <div>
-                            <span class="author-name d-block">John Doe</span>
-                            <small class="text-muted">Staff Writer</small>
-                        </div>
-                    </div>
-                    <div class="news-details-stats">
-                        <span class="me-3"><i class="far fa-clock me-1"></i> 2 hours ago</span>
-                        <span class="me-3"><i class="far fa-eye me-1"></i> 1.2K Views</span>
-                        <span><i class="far fa-comment me-1"></i> 8 Comments</span>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Featured Image -->
-            <figure class="news-featured-image mb-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXxfn1j1vKFy8yJeBGl2AS6Dcah-lKgHofg&s" 
-                     alt="Community Center Renovation" 
-                     class="img-fluid rounded-3">
-                <figcaption class="text-center text-muted mt-2">Local Community Center after Renovation</figcaption>
-            </figure>
-
-            <!-- Article Content -->
-            <div class="news-content">
-                <p>In a significant milestone for our local community, the long-awaited community center has finally reopened its doors after an extensive renovation project. The renovation, which took six months to complete, has transformed the aging facility into a modern, welcoming space for residents of all ages.</p>
-
-                <p>The community center, located in the heart of downtown, has been a cornerstone of local social activities for decades. The recent renovation aims to breathe new life into this beloved institution, offering improved facilities and expanded services.</p>
-
-                <h3 class="mt-4">Key Improvements</h3>
-                <ul>
-                    <li>State-of-the-art multipurpose hall</li>
-                    <li>Updated children's play area</li>
-                    <li>Modern computer and technology center</li>
-                    <li>Accessible design for seniors and people with disabilities</li>
-                    <li>Energy-efficient lighting and solar panels</li>
-                </ul>
-
-                <p>Local Mayor Emma Rodriguez cut the ribbon at the grand reopening ceremony, emphasizing the center's importance. "This renovation represents our commitment to creating spaces that bring our community together," she stated.</p>
-
-                <p>Community members have already begun booking spaces for various activities, from youth programs to senior fitness classes and local workshops.</p>
-            </div>
-
-            <!-- Social Interaction Section -->
-            <div class="social-interaction mt-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="like-section">
-                        <button class="btn btn-outline-primary me-2" id="likeButton">
-                            <i class="far fa-heart me-1"></i>Like <span class="like-count">(24)</span>
-                        </button>
-                        <button class="btn btn-outline-secondary" id="shareButton">
-                            <i class="fas fa-share-alt me-1"></i>Share
-                        </button>
-                    </div>
-                    <div class="bookmark-section">
-                        <button class="btn btn-outline-secondary" id="bookmarkButton">
-                            <i class="far fa-bookmark me-1"></i>Bookmark
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comments Section -->
-            <div class="comments-section mt-4">
-                <h4 class="mb-3">Comments (8)</h4>
-                
-                <!-- Comment Form -->
-                <div class="comment-form mb-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" 
-                             alt="User Avatar" 
-                             class="rounded-circle me-3" 
-                             style="width: 40px; height: 40px; object-fit: cover;">
-                        <textarea class="form-control" placeholder="Write a comment..." rows="2"></textarea>
-                    </div>
-                    <button class="btn btn-primary">Post Comment</button>
-                </div>
-
-                <!-- Existing Comments -->
-                <div class="comments">
-                    <!-- Comment 1 -->
-                    <div class="comment d-flex mb-3">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" 
-                             alt="Commenter" 
-                             class="rounded-circle me-3" 
-                             style="width: 40px; height: 40px; object-fit: cover;">
-                        <div class="comment-content flex-grow-1">
-                            <div class="comment-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-1">Michael Chen</h6>
-                                <small class="text-muted">1 hour ago</small>
-                            </div>
-                            <p class="mb-2">This is fantastic! Our community really needed this upgrade.</p>
-                            <div class="comment-actions">
-                                <button class="btn btn-sm btn-outline-secondary me-2">
-                                    <i class="far fa-heart me-1"></i>Like
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary">
-                                    <i class="far fa-comment me-1"></i>Reply
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Comment 2 -->
-                    <div class="comment d-flex mb-3">
-                        <img src="https://randomuser.me/api/portraits/women/50.jpg" 
-                             alt="Commenter" 
-                             class="rounded-circle me-3" 
-                             style="width: 40px; height: 40px; object-fit: cover;">
-                        <div class="comment-content flex-grow-1">
-                            <div class="comment-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-1">Sarah Thompson</h6>
-                                <small class="text-muted">30 minutes ago</small>
-                            </div>
-                            <p class="mb-2">Can't wait to check out the new computer center!</p>
-                            <div class="comment-actions">
-                                <button class="btn btn-sm btn-outline-secondary me-2">
-                                    <i class="far fa-heart me-1"></i>Like
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary">
-                                    <i class="far fa-comment me-1"></i>Reply
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- Related News Section -->
-        <section class="related-news mt-5">
-            <h3 class="mb-3">Related News</h3>
+        <div class="news-view-section my-4">
             <div class="row">
-                <!-- Related News Item 1 -->
-                <div class="col-md-4 mb-3">
-                    <div class="card news-card h-100">
-                        <div class="news-img-container">
-                            <img src="https://images.pexels.com/photos/3680219/pexels-photo-3680219.jpeg" 
-                                 class="card-img-top news-img" alt="Technology Park">
-                            <span class="category-badge badge bg-info">Local</span>
+                <div class="col-12">
+                    <div class="news-view-header">
+                        <!-- Title with simplified edit icon -->
+                        <div class="title-container">
+                            <h1 class="news-view-title">Local Community Center Opens After Renovation</h1>
+                            <i class="fas fa-edit text-muted edit-icon"></i>
                         </div>
-                        <div class="card-body">
-                            <a href="#" class="news-title-link">
-                                <h5 class="card-title">New Technology Park to Create 500 Jobs</h5>
-                            </a>
-                            <div class="news-meta">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i> 5 hours ago</small>
-                            </div>
+                        
+                        <!-- Category and time below title -->
+                        <div class="article-meta">
+                            <small class="text-muted ms-2">
+                                <i class="fas fa-folder me-1"></i> Category Name
+                                <i class="fas fa-clock me-1"></i> 2 hours ago
+                            </small>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Related News Item 2 -->
-                <div class="col-md-4 mb-3">
-                    <div class="card news-card h-100">
-                        <div class="news-img-container">
-                            <img src="https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp" 
-                                 class="card-img-top news-img" alt="Sports Team">
-                            <span class="category-badge badge bg-success">Sports</span>
-                        </div>
-                        <div class="card-body">
-                            <a href="#" class="news-title-link">
-                                <h5 class="card-title">Local Sports Team Advances to Finals</h5>
-                            </a>
-                            <div class="news-meta">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i> 12 hours ago</small>
-                            </div>
+                        
+                        
+                        <div class="news-view-image my-4">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXxfn1j1vKFy8yJeBGl2AS6Dcah-lKgHofg&s" class="img-fluid w-100" alt="Community Center">
                         </div>
                     </div>
-                </div>
-
-                <!-- Related News Item 3 -->
-                <div class="col-md-4 mb-3">
-                    <div class="card news-card h-100">
-                        <div class="news-img-container">
-                            <img src="https://media.istockphoto.com/id/843408508/photo/photography-camera-lens-concept.jpg" 
-                                 class="card-img-top news-img" alt="Health Clinic">
-                            <span class="category-badge badge bg-danger">Health</span>
-                        </div>
-                        <div class="card-body">
-                            <a href="#" class="news-title-link">
-                                <h5 class="card-title">New Health Clinic Opens in Downtown</h5>
-                            </a>
-                            <div class="news-meta">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i> 1 day ago</small>
-                            </div>
-                        </div>
+                    
+                    <div class="news-view-content">
+                        <p>The local community center, a beloved landmark in our neighborhood, has completed its much-anticipated renovation. After months of construction and community fundraising, the center is now ready to serve residents with enhanced facilities and improved amenities.</p>
+                        
+                        <p>The renovation project, which began six months ago, aimed to modernize the facility while preserving its historical significance. Key improvements include:</p>
+                        
+                        <ul>
+                            <li>A new state-of-the-art multipurpose hall</li>
+                            <li>Upgraded children's play area</li>
+                            <li>Modernized fitness center with latest equipment</li>
+                            <li>Improved accessibility features</li>
+                            <li>Energy-efficient lighting and solar panels</li>
+                        </ul>
+                        
+                        <p>"This renovation represents more than just a building upgrade," said Mayor Sarah Thompson during the opening ceremony. "It's a testament to our community's commitment to growth, inclusivity, and shared spaces that bring people together."</p>
+                        
+                        <p>Local residents are already expressing excitement about the new facilities. Community programs, workshops, and events are expected to resume in the coming weeks, offering something for every age group.</p>
+                        
+                        
+                        <p>The center will host an open house next weekend, inviting all community members to tour the new facilities and learn about upcoming programs.</p>
+                    </div>
+                    
+                    <div class="news-view-actions my-4">
+                        <button class="btn btn-outline-primary me-2"><i class="far fa-heart me-1"></i> Like</button>
+                        <button class="btn btn-outline-secondary me-2"><i class="far fa-comment me-1"></i> Comment</button>
+                        <button class="btn btn-outline-success"><i class="fas fa-share me-1"></i> Share</button>
+                    </div>
+                    
+                    <div class="comments-section mt-4">
+                        <h4 class="mb-3 text-muted">Comments Comming Soon!</h4>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
-
+    
     <!-- Footer with Dropdown Submenu -->
-    <footer>
+    <footer class="custom-container">
         <div class="footer-div">
             <ul>
                 <li><a href="#">About</a></li>
@@ -261,155 +203,19 @@
     <script src="assets/js/script.js"></script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
+    
+    <!-- Added script to handle tab switching -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Like Button Functionality
-            const likeButton = document.getElementById('likeButton');
-            const likeCount = document.querySelector('.like-count');
+            const tabs = document.querySelectorAll('.tab-btn');
             
-            likeButton.addEventListener('click', function() {
-                const heartIcon = this.querySelector('i');
-                let currentCount = parseInt(likeCount.textContent.replace(/[()]/g, ''));
-                
-                if (heartIcon.classList.contains('far')) {
-                    // Like the article
-                    heartIcon.classList.remove('far');
-                    heartIcon.classList.add('fas');
-                    heartIcon.style.color = '#e74c3c';
-                    likeCount.textContent = `(${currentCount + 1})`;
-                } else {
-                    // Unlike the article
-                    heartIcon.classList.remove('fas');
-                    heartIcon.classList.add('far');
-                    heartIcon.style.color = '';
-                    likeCount.textContent = `(${currentCount - 1})`;
-                }
-            });
-
-            // Bookmark Button Functionality
-            const bookmarkButton = document.getElementById('bookmarkButton');
-            bookmarkButton.addEventListener('click', function() {
-                const bookmarkIcon = this.querySelector('i');
-                
-                if (bookmarkIcon.classList.contains('far')) {
-                    // Bookmark the article
-                    bookmarkIcon.classList.remove('far');
-                    bookmarkIcon.classList.add('fas');
-                    alert('Article bookmarked!');
-                } else {
-                    // Remove bookmark
-                    bookmarkIcon.classList.remove('fas');
-                    bookmarkIcon.classList.add('far');
-                    alert('Bookmark removed');
-                }
-            });
-
-            // Share Button Functionality
-            const shareButton = document.getElementById('shareButton');
-            shareButton.addEventListener('click', function() {
-                // In a real app, this would use Web Share API or open a share dialog
-                if (navigator.share) {
-                    navigator.share({
-                        title: document.querySelector('.news-title').textContent,
-                        text: 'Check out this interesting news article!',
-                        url: window.location.href
-                    }).catch(console.error);
-                } else {
-                    // Fallback for browsers that don't support Web Share API
-                    const tempInput = document.createElement('input');
-                    tempInput.value = window.location.href;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
-                    alert('Article link copied to clipboard!');
-                }
-            });
-
-            // Comment Posting Functionality
-            const commentForm = document.querySelector('.comment-form');
-            const commentTextarea = commentForm.querySelector('textarea');
-            const postCommentButton = commentForm.querySelector('button');
-            const commentsContainer = document.querySelector('.comments');
-
-            postCommentButton.addEventListener('click', function() {
-                const commentText = commentTextarea.value.trim();
-                
-                if (commentText) {
-                    // Create new comment element
-                    const newComment = document.createElement('div');
-                    newComment.className = 'comment d-flex mb-3';
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
                     
-                    // Use a random user image for demonstration
-                    const randomUserImages = [
-                        'https://randomuser.me/api/portraits/women/60.jpg',
-                        'https://randomuser.me/api/portraits/men/60.jpg',
-                        'https://randomuser.me/api/portraits/women/65.jpg',
-                        'https://randomuser.me/api/portraits/men/65.jpg'
-                    ];
-                    const randomImage = randomUserImages[Math.floor(Math.random() * randomUserImages.length)];
-
-                    newComment.innerHTML = `
-                        <img src="${randomImage}" 
-                             alt="Commenter" 
-                             class="rounded-circle me-3" 
-                             style="width: 40px; height: 40px; object-fit: cover;">
-                        <div class="comment-content flex-grow-1">
-                            <div class="comment-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-1">You</h6>
-                                <small class="text-muted">Just now</small>
-                            </div>
-                            <p class="mb-2">${commentText}</p>
-                            <div class="comment-actions">
-                                <button class="btn btn-sm btn-outline-secondary me-2">
-                                    <i class="far fa-heart me-1"></i>Like
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary">
-                                    <i class="far fa-comment me-1"></i>Reply
-                                </button>
-                            </div>
-                        </div>
-                    `;
-
-                    // Add like and reply functionality to new comment
-                    const likeCommentBtn = newComment.querySelector('.btn-outline-secondary:first-child');
-                    likeCommentBtn.addEventListener('click', function() {
-                        const heartIcon = this.querySelector('i');
-                        if (heartIcon.classList.contains('far')) {
-                            heartIcon.classList.remove('far');
-                            heartIcon.classList.add('fas');
-                            heartIcon.style.color = '#e74c3c';
-                        } else {
-                            heartIcon.classList.remove('fas');
-                            heartIcon.classList.add('far');
-                            heartIcon.style.color = '';
-                        }
-                    });
-
-                    // Add new comment to comments section
-                    commentsContainer.appendChild(newComment);
-
-                    // Clear textarea
-                    commentTextarea.value = '';
-
-                    // Update comment count
-                    const commentCountElement = document.querySelector('h4');
-                    const currentCount = parseInt(commentCountElement.textContent.match(/\d+/)[0]);
-                    commentCountElement.textContent = `Comments (${currentCount + 1})`;
-                } else {
-                    alert('Please write a comment before posting.');
-                }
-            });
-
-            // Related News Click Handling
-            const relatedNewsLinks = document.querySelectorAll('.related-news .news-title-link');
-            relatedNewsLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const newsTitle = this.querySelector('.card-title').textContent;
-                    alert(`Opening details for: ${newsTitle}`);
-                    // In a real application, this would navigate to the specific news details
+                    // Add active class to clicked tab
+                    this.classList.add('active');
                 });
             });
         });
