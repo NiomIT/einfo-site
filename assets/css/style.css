@@ -1044,3 +1044,375 @@ body.dark-mode .contact-info {
     overflow: hidden;
     vertical-align: bottom;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* Account page specific styles */
+    .account-card {
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+    
+    .profile-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .profile-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+    }
+    
+    .profile-info {
+        flex: 1;
+    }
+    
+    .profile-name {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .edit-profile-text {
+        color: #777;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+    
+    .edit-profile-text:hover {
+        color: #00adef;
+        text-decoration: underline;
+    }
+    
+    .dark-mode-toggle-account {
+        cursor: pointer;
+        margin-left: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .option-card {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+        height: 100%;
+    }
+    
+    .option-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .option-icon {
+        margin-right: 12px;
+        width: 24px;
+        text-align: center;
+        color: #00adef;
+        font-size: 1.2rem;
+    }
+    
+    .option-content {
+        flex: 1;
+    }
+    
+    .option-title {
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    /* Settings submenu - MODIFIED */
+    .settings-submenu {
+        margin-top: -5px;
+        margin-bottom: 15px;
+        display: none;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        width: 100%;
+        position: relative;
+    }
+    
+    .submenu-options {
+        padding: 0 5px;
+    }
+    
+    .submenu-card {
+        padding: 10px 15px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+    
+    .submenu-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        background-color: #e9ecef;
+    }
+    
+    .submenu-icon {
+        margin-right: 12px;
+        width: 20px;
+        text-align: center;
+        color: #6c757d;
+    }
+    
+    .submenu-title {
+        font-weight: 500;
+        margin-bottom: 0;
+        color: #495057;
+        font-size: 0.95rem;
+    }
+    
+    /* Modified logout container and button */
+    .logout-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .logout-btn {
+        text-align: center;
+        padding: 8px 20px;
+        border-radius: 5px;
+        border: 1px solid #dc3545;
+        background-color: transparent;
+        color: #dc3545;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    
+    .logout-btn:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+    
+    .logout-icon {
+        margin-right: 8px;
+        font-size: 1rem;
+    }
+    
+    /* Dark mode specific styles */
+    body.dark-mode .account-card,
+    body.dark-mode .option-card {
+        background-color: var(--dark-card-bg);
+        border-color: var(--dark-border);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    
+    body.dark-mode .dark-mode-toggle-account {
+        background-color: #2d2d2d;
+    }
+    
+    body.dark-mode .submenu-card {
+        background-color: #2d2d2d;
+        border-color: var(--dark-border);
+        color: var(--dark-text);
+    }
+    
+    body.dark-mode .submenu-card:hover {
+        background-color: #3a3a3a;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    body.dark-mode .submenu-title {
+        color: var(--dark-text);
+    }
+    
+    body.dark-mode .edit-profile-text {
+        color: #adb5bd;
+    }
+    
+    body.dark-mode .option-title {
+        color: var(--dark-text);
+    }
+    
+    body.dark-mode .submenu-icon {
+        color: #adb5bd;
+    }
+    
+    body.dark-mode .logout-btn {
+        border-color: #dc3545;
+        color: #dc3545;
+    }
+    
+    body.dark-mode .logout-btn:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+    :root {
+        --primary-color: #00adef;
+        --dark-bg: #121212;
+        --dark-card-bg: #1e1e1e;
+        --dark-text: #e0e0e0;
+        --dark-border: #333;
+    }
+    
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .main-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .login-container {
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #333;
+    }
+    
+    .input-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: nowrap; /* Ensure always in one line */
+    }
+    
+    .country-select {
+        padding: 10px 15px;
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #ced4da;
+        border-right: none;
+        min-width: 110px; /* Ensure country code has enough space */
+        flex-shrink: 0; /* Prevent shrinking on small screens */
+    }
+    
+    .phone-input {
+        flex: 1;
+        padding: 10px 15px;
+        border-radius: 0 8px 8px 0;
+        border: 1px solid #ced4da;
+        font-size: 16px;
+        min-width: 100px; /* Minimum width for phone input */
+    }
+    
+    .next-btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .next-btn:hover {
+        background-color: #0097d6;
+    }
+    
+    .dark-mode-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Dark mode styles */
+    body.dark-mode {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+    
+    body.dark-mode .custom-nav {
+        background-color: var(--dark-card-bg);
+    }
+    
+    body.dark-mode .nav-item a {
+        color: #adb5bd;
+    }
+    
+    body.dark-mode .nav-item.active a {
+        color: var(--primary-color);
+    }
+    
+    body.dark-mode .page-title {
+        color: var(--dark-text);
+    }
+    
+    body.dark-mode .dark-mode-toggle {
+        background-color: #2d2d2d;
+        color: var(--dark-text);
+    }
+    
+    body.dark-mode .country-select,
+    body.dark-mode .phone-input {
+        background-color: #2d2d2d;
+        border-color: var(--dark-border);
+        color: var(--dark-text);
+    }
+    
+    /* Fix for logo in dark mode */
+    body.dark-mode #siteLogo {
+        filter: brightness(0) invert(1); /* Makes the logo white in dark mode */
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 575.98px) {
+        .input-group {
+            flex-direction: row; /* Ensure horizontal layout even on smallest screens */
+        }
+        
+        .country-select {
+            min-width: 90px; /* Slightly smaller on very small screens */
+        }
+    }

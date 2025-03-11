@@ -1156,3 +1156,164 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run on window resize
     window.addEventListener('resize', adjustButtonText);
 });
+
+    // code for dark mode Account page specific JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Settings submenu toggle with smooth animation
+    const settingsOption = document.getElementById('settings-option');
+    const settingsSubmenu = document.getElementById('settings-submenu');
+    const settingsToggle = document.getElementById('settings-toggle');
+    
+    if (settingsOption && settingsSubmenu && settingsToggle) {
+        settingsOption.addEventListener('click', function() {
+            if (settingsSubmenu.style.display === 'none' || settingsSubmenu.style.display === '') {
+                // Show submenu with smooth animation
+                settingsSubmenu.style.display = 'block';
+                settingsSubmenu.style.maxHeight = '0px';
+                setTimeout(() => {
+                    settingsSubmenu.style.maxHeight = settingsSubmenu.scrollHeight + 'px';
+                }, 10);
+                settingsToggle.classList.remove('fa-chevron-down');
+                settingsToggle.classList.add('fa-chevron-up');
+            } else {
+                // Hide submenu with smooth animation
+                settingsSubmenu.style.maxHeight = '0px';
+                setTimeout(() => {
+                    settingsSubmenu.style.display = 'none';
+                }, 300); // Match the transition duration
+                settingsToggle.classList.remove('fa-chevron-up');
+                settingsToggle.classList.add('fa-chevron-down');
+            }
+        });
+    }
+    
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            if (document.body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+    }
+    
+    // Check if dark mode is enabled
+    if (localStorage.getItem('darkMode') === 'enabled' || 
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Update dark mode icon
+        const darkModeIcon = document.querySelector('#darkModeToggle i');
+        if (darkModeIcon) {
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+    }
+    
+    // Edit profile option
+    const editProfileOption = document.getElementById('edit-profile-option');
+    if (editProfileOption) {
+        editProfileOption.addEventListener('click', function() {
+            alert('Edit Profile form would open here');
+        });
+    }
+    
+    // Change Password option
+    const changePasswordOption = document.getElementById('change-password-option');
+    if (changePasswordOption) {
+        changePasswordOption.addEventListener('click', function() {
+            alert('Change Password functionality would open here');
+        });
+    }
+    
+    // Delete Account option
+    const deleteAccountOption = document.getElementById('delete-account-option');
+    if (deleteAccountOption) {
+        deleteAccountOption.addEventListener('click', function() {
+            if(confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                alert('Account deletion process would start here');
+            }
+        });
+    }
+    
+    // Notification option
+    const notificationOption = document.getElementById('notification-option');
+    if (notificationOption) {
+        notificationOption.addEventListener('click', function() {
+            alert('Notification settings would open here');
+        });
+    }
+    
+    // Messages option
+    const messagesOption = document.getElementById('messages-option');
+    if (messagesOption) {
+        messagesOption.addEventListener('click', function() {
+            alert('Messages would open here');
+        });
+    }
+    
+    // Edit profile text
+    const editProfileText = document.querySelector('.edit-profile-text');
+    if (editProfileText) {
+        editProfileText.addEventListener('click', function() {
+            alert('Edit Profile form would open here');
+        });
+    }
+    
+    // Logout button
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            if(confirm('Are you sure you want to logout?')) {
+                // In a real application, this would log the user out
+                window.location.href = 'index.html';
+            }
+        });
+    }
+});
+
+// Dark mode functions - these should be merged with your existing functions
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+    
+    const darkModeIcon = document.querySelector('#darkModeToggle i');
+    if (darkModeIcon) {
+        darkModeIcon.classList.remove('fa-moon');
+        darkModeIcon.classList.add('fa-sun');
+    }
+    
+    localStorage.setItem('darkMode', 'enabled');
+    
+    // Change logo to white version
+    const logo = document.getElementById('siteLogo');
+    if (logo) {
+        logo.src = 'assets/img/white-logo.png';
+    }
+}
+
+function disableDarkMode() {
+    document.body.classList.remove('dark-mode');
+    
+    const darkModeIcon = document.querySelector('#darkModeToggle i');
+    if (darkModeIcon) {
+        darkModeIcon.classList.remove('fa-sun');
+        darkModeIcon.classList.add('fa-moon');
+    }
+    
+    localStorage.setItem('darkMode', 'disabled');
+    
+    // Change logo back to default
+    const logo = document.getElementById('siteLogo');
+    if (logo) {
+        logo.src = 'assets/img/logo.png';
+    }
+}
+
+
+
+
+
+
+
+
+

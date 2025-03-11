@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - Account</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item logo-container">
+                    <a href="index.html">
+                        <img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+                    </a>
+                </li>
+                <li class="nav-item"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+                <li class="nav-item"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+                <li class="nav-item"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+                <li class="nav-item active"><a href="account.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="dark-mode-toggle" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </div>
+        
+        <div class="login-container">
+            <h1 class="page-title">Account Login or Signup</h1>
+            <form>
+                <div class="input-group">
+                    <select class="country-select" id="countrySelect">
+                        <option value="+880">🇧🇩 +880</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+86">🇨🇳 +86</option>
+                        <option value="+81">🇯🇵 +81</option>
+                    </select>
+                    <input type="tel" class="phone-input" id="phoneNumber" placeholder="Phone Number">
+                </div>
+                <button type="button" class="next-btn" id="nextButton" onclick="window.location.href='login.html';">Next</button>
+            </form>
+        </div>
+    </div>
+    
+   <!-- Footer with Dropdown Submenu -->
+<footer class="custom-container">
+    <div class="footer-div">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li class="dropdown">
+                <a href="#" class="more-link">More</a>
+                <div class="dropdown-menu">
+                    <a href="admin-login.html">Admin</a>
+                    <a href="ad.html">Ad</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+    <!-- Script for dark mode toggle -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - Login</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+   <style>
+
+body.dark-mode .password-field {
+    background-color: #2d2d2d;
+    border-color: #333;
+    color: #e0e0e0;
+}
+    .password-container {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    .password-field {
+        width: 100%;
+        padding: 12px 15px;
+        padding-right: 40px; /* Space for the eye icon */
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        font-size: 16px;
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #6c757d;
+        transition: color 0.2s;
+    }
+    
+    .password-toggle:hover {
+        color: #00adef;
+    }
+        
+    .next-btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .next-btn:hover {
+        background-color: #0097d6;
+    }
+    
+    .forgot-password {
+        margin-top: 15px;
+        color: var(--primary-color);
+        cursor: pointer;
+        display: none;
+        text-align: center;
+    }
+    
+    .forgot-password:hover {
+        text-decoration: underline;
+    }
+    
+    .error-message {
+        color: #dc3545;
+        margin-bottom: 15px;
+        display: none;
+    }
+    
+    /* Dark mode styles for password toggle */
+    body.dark-mode .password-toggle {
+        color: #adb5bd;
+    }
+    
+    body.dark-mode .password-toggle:hover {
+        color: #00adef;
+    }
+   </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item logo-container">
+                    <a href="index.html">
+                        <img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+                    </a>
+                </li>
+                <li class="nav-item"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+                <li class="nav-item"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+                <li class="nav-item"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+                <li class="nav-item active"><a href="account.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="dark-mode-toggle" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </div>
+        
+        <div class="login-container">
+            <h1 class="page-title">Account Login</h1>
+            <form>
+                <div id="errorMessage" class="error-message">Incorrect password. Please try again.</div>
+                <div class="password-container">
+                    <input type="password" class="password-field" id="password" placeholder="Password">
+                    <span class="password-toggle" id="passwordToggle">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+                <button type="button" class="next-btn" id="loginButton">Login</button>
+                <div class="forgot-password" id="forgotPassword">Forgot Password?</div>
+            </form>
+        </div>
+    </div>
+    
+   <!-- Footer with Dropdown Submenu -->
+<footer class="custom-container">
+    <div class="footer-div">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li class="dropdown">
+                <a href="#" class="more-link">More</a>
+                <div class="dropdown-menu">
+                    <a href="admin-login.html">Admin</a>
+                    <a href="ad.html">Ad</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+    <!-- Script for login functionality and dark mode toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const loginButton = document.getElementById('loginButton');
+            const password = document.getElementById('password');
+            const errorMessage = document.getElementById('errorMessage');
+            const forgotPassword = document.getElementById('forgotPassword');
+            const passwordToggle = document.getElementById('passwordToggle');
+            
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            // Toggle dark mode
+            darkModeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Toggle password visibility
+            passwordToggle.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                
+                // Toggle eye icon
+                if (type === 'text') {
+                    passwordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+                } else {
+                    passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
+                }
+            });
+            
+            // Login button functionality
+            loginButton.addEventListener('click', function() {
+                // For demo purposes, any password other than "demo123" is considered incorrect
+                if (password.value === "demo123") {
+                    // Successful login - redirect to account page
+                    window.location.href = 'account.html';
+                } else {
+                    // Show error message and forgot password link
+                    errorMessage.style.display = 'block';
+                    forgotPassword.style.display = 'block';
+                }
+            });
+            
+            // Allow Enter key to trigger login
+            password.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loginButton.click();
+                }
+            });
+            
+            // Forgot password functionality
+            forgotPassword.addEventListener('click', function() {
+                alert('A password reset link will be sent to your registered phone number.');
+            });
+        });
+
+        // Navigation bar hide/show on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Dropdown functionality for More link in footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.querySelector('.dropdown .more-link');
+            const dropdown = document.querySelector('.dropdown');
+            
+            // Toggle dropdown on click
+            dropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
