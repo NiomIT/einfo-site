@@ -1743,3 +1743,138 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// singup page er code 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Location data
+    const locationData = {
+        bangladesh: {
+            cities: ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi', 'Sylhet'],
+            areas: {
+                'Dhaka': ['Gulshan', 'Banani', 'Dhanmondi', 'Uttara', 'Motijheel'],
+                'Chittagong': ['Agrabad', 'Nasirabad', 'Khulshi', 'Patenga', 'Halishahar'],
+                'Khulna': ['Khalishpur', 'Sonadanga', 'Boyra', 'Daulatpur', 'Khan Jahan Ali'],
+                'Rajshahi': ['Shaheb Bazar', 'Motihar', 'Padma Residential', 'Upashahar', 'Kazla'],
+                'Sylhet': ['Zindabazar', 'Ambarkhana', 'Upashahar', 'Shahjalal', 'Shibganj']
+            }
+        }
+    };
+
+    // Profile Image Upload
+    const profileUpload = document.getElementById('profileUpload');
+    const previewImage = document.querySelector('.preview-image');
+    const uploadIcon = document.querySelector('.upload-icon');
+    const uploadText = document.querySelector('.upload-text');
+    const removeImageBtn = document.querySelector('.remove-image');
+
+    profileUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                previewImage.src = event.target.result;
+                previewImage.style.display = 'block';
+                uploadIcon.style.display = 'none';
+                uploadText.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Remove image functionality
+    removeImageBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        previewImage.src = '';
+        previewImage.style.display = 'none';
+        uploadIcon.style.display = 'block';
+        uploadText.style.display = 'block';
+        profileUpload.value = ''; // Clear the file input
+    });
+
+    // City and Area Suggestions
+    function createSuggestionList(input, suggestList, suggestions) {
+        input.addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            suggestList.innerHTML = '';
+            suggestList.style.display = 'none';
+
+            if (value.length > 0) {
+                const filteredSuggestions = suggestions.filter(item => 
+                    item.toLowerCase().includes(value)
+                );
+
+                if (filteredSuggestions.length > 0) {
+                    filteredSuggestions.forEach(item => {
+                        const div = document.createElement('div');
+                        div.textContent = item;
+                        div.addEventListener('click', function() {
+                            input.value = item;
+                            suggestList.style.display = 'none';
+                        });
+                        suggestList.appendChild(div);
+                    });
+                    suggestList.style.display = 'block';
+                }
+            }
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!input.contains(e.target) && !suggestList.contains(e.target)) {
+                suggestList.style.display = 'none';
+            }
+        });
+    }
+
+    // City input suggestions
+    const cityInput = document.getElementById('cityInput');
+    const citySuggestList = document.getElementById('citySuggestList');
+    createSuggestionList(cityInput, citySuggestList, locationData.bangladesh.cities);
+
+    // Area input suggestions
+    const areaInput = document.getElementById('areaInput');
+    const areaSuggestList = document.getElementById('areaSuggestList');
+
+    // Update area suggestions based on selected city
+    cityInput.addEventListener('change', function() {
+        const selectedCity = this.value;
+        const cityAreas = locationData.bangladesh.areas[selectedCity] || [];
+        
+        createSuggestionList(areaInput, areaSuggestList, cityAreas);
+    });
+
+    // Form submission
+    const signupForm = document.getElementById('signupForm');
+    signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Basic form validation
+        const fullName = document.getElementById('fullName').value.trim();
+        const city = cityInput.value.trim();
+        const area = areaInput.value.trim();
+        const address = document.getElementById('address').value.trim();
+        
+        if (!fullName || !city || !area || !address) {
+            alert('Please fill out all fields');
+            return;
+        }
+        
+        // In a real application, you would send this data to a server
+        alert('Account creation successful!');
+        window.location.href = 'account.html';
+    });
+});

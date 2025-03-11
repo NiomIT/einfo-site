@@ -11,105 +11,6 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .signup-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .profile-upload {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            border: 2px solid #00adef;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        .profile-upload:hover {
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .profile-upload img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .profile-upload .upload-icon {
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            background-color: #00adef;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
-        }
-        .profile-upload input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-        .location-group {
-            display: flex;
-            gap: 10px;
-        }
-        .location-group .form-control {
-            flex: 1;
-        }
-        #citySuggestList, 
-        #areaSuggestList {
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-            border: 1px solid #dee2e6;
-            border-top: none;
-            position: absolute;
-            width: 100%;
-            z-index: 1000;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        #citySuggestList div, 
-        #areaSuggestList div {
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        #citySuggestList div:hover, 
-        #areaSuggestList div:hover {
-            background-color: #f8f9fa;
-        }
-        .input-container {
-            position: relative;
-        }
-        body.dark-mode .location-group .form-control,
-        body.dark-mode #citySuggestList,
-        body.dark-mode #areaSuggestList {
-            background-color: #2d2d2d;
-            color: #e0e0e0;
-            border-color: #333;
-        }
-        body.dark-mode #citySuggestList div,
-        body.dark-mode #areaSuggestList div {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-        body.dark-mode #citySuggestList div:hover,
-        body.dark-mode #areaSuggestList div:hover {
-            background-color: #2a2a2a;
-        }
-    </style>
 </head>
 <body>
     <!-- Nav -->
@@ -136,11 +37,15 @@
             
             <form id="signupForm">
                 <!-- Profile Image Upload -->
-                <div class="profile-upload">
-                    <img src="assets/img/default-profile.png" id="profilePreview" alt="Profile">
-                    <input type="file" id="profileUpload" accept="image/*">
-                    <div class="upload-icon">
-                        <i class="fas fa-camera"></i>
+                <div class="image-upload-container">
+                    <div class="image-upload">
+                        <input type="file" id="profileUpload" accept="image/*">
+                        <div class="remove-image">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <div class="upload-text">Upload Image</div>
+                        <img class="preview-image" src="" alt="Profile Preview" style="display:none;">
                     </div>
                 </div>
                 
@@ -189,112 +94,6 @@
             </ul>
         </div>
     </footer>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Location data
-        const locationData = {
-            bangladesh: {
-                cities: ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi', 'Sylhet'],
-                areas: {
-                    'Dhaka': ['Gulshan', 'Banani', 'Dhanmondi', 'Uttara', 'Motijheel'],
-                    'Chittagong': ['Agrabad', 'Nasirabad', 'Khulshi', 'Patenga', 'Halishahar'],
-                    'Khulna': ['Khalishpur', 'Sonadanga', 'Boyra', 'Daulatpur', 'Khan Jahan Ali'],
-                    'Rajshahi': ['Shaheb Bazar', 'Motihar', 'Padma Residential', 'Upashahar', 'Kazla'],
-                    'Sylhet': ['Zindabazar', 'Ambarkhana', 'Upashahar', 'Shahjalal', 'Shibganj']
-                }
-            }
-        };
-
-        // Profile Image Upload
-        const profileUpload = document.getElementById('profileUpload');
-        const profilePreview = document.getElementById('profilePreview');
-
-        profileUpload.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    profilePreview.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // City and Area Suggestions
-        function createSuggestionList(input, suggestList, suggestions) {
-            input.addEventListener('input', function() {
-                const value = this.value.toLowerCase();
-                suggestList.innerHTML = '';
-                suggestList.style.display = 'none';
-
-                if (value.length > 0) {
-                    const filteredSuggestions = suggestions.filter(item => 
-                        item.toLowerCase().includes(value)
-                    );
-
-                    if (filteredSuggestions.length > 0) {
-                        filteredSuggestions.forEach(item => {
-                            const div = document.createElement('div');
-                            div.textContent = item;
-                            div.addEventListener('click', function() {
-                                input.value = item;
-                                suggestList.style.display = 'none';
-                            });
-                            suggestList.appendChild(div);
-                        });
-                        suggestList.style.display = 'block';
-                    }
-                }
-            });
-
-            // Hide suggestions when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!input.contains(e.target) && !suggestList.contains(e.target)) {
-                    suggestList.style.display = 'none';
-                }
-            });
-        }
-
-        // City input suggestions
-        const cityInput = document.getElementById('cityInput');
-        const citySuggestList = document.getElementById('citySuggestList');
-        createSuggestionList(cityInput, citySuggestList, locationData.bangladesh.cities);
-
-        // Area input suggestions
-        const areaInput = document.getElementById('areaInput');
-        const areaSuggestList = document.getElementById('areaSuggestList');
-
-        // Update area suggestions based on selected city
-        cityInput.addEventListener('change', function() {
-            const selectedCity = this.value;
-            const cityAreas = locationData.bangladesh.areas[selectedCity] || [];
-            
-            createSuggestionList(areaInput, areaSuggestList, cityAreas);
-        });
-
-        // Form submission
-        const signupForm = document.getElementById('signupForm');
-        signupForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const fullName = document.getElementById('fullName').value.trim();
-            const city = cityInput.value.trim();
-            const area = areaInput.value.trim();
-            const address = document.getElementById('address').value.trim();
-            
-            if (!fullName || !city || !area || !address) {
-                alert('Please fill out all fields');
-                return;
-            }
-            
-            // In a real application, you would send this data to a server
-            alert('Account creation successful!');
-            window.location.href = 'account.html';
-        });
-    });
-    </script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
