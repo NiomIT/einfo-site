@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
-    <title>eINFO - Sign Up</title>
+    <title>eINFO - Post News</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    
 </head>
 <body>
     <!-- Nav -->
@@ -32,48 +31,42 @@
     </nav>
     
     <!-- Main Content -->
-    <div class="main-content">
-        <div class="signup-container">
-            <h1 class="page-title text-center mb-4">Create Your Account</h1>
-          
-            <form id="signupForm">
-                <!-- Profile Image Upload -->
-                <div class="image-upload-container">
-                    <div class="image-upload">
-                        <input type="file" id="profileUpload" accept="image/*">
-                        <div class="remove-image">
+    <div class="main-content" style="max-width: 100%; padding: 0;">
+        <div class="news-form-wrapper">
+            <h1 class="page-title text-center mb-4">Create a News</h1>
+            
+            <form id="newsPostForm">
+                <!-- News Image Upload -->
+                <div class="news-image-container">
+                    <div class="news-image-uploader">
+                        <input type="file" id="newsImageFile" accept="image/*">
+                        <div class="news-remove-btn">
                             <i class="fas fa-times"></i>
                         </div>
-                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                        <div class="upload-text">Upload Image</div>
-                        <img class="preview-image" src="" alt="Profile Preview" style="display:none;">
+                        <i class="fas fa-cloud-upload-alt news-upload-icon"></i>
+                        <div class="news-upload-text">Upload Image</div>
+                        <img class="news-preview-image" src="" alt="News Image Preview" style="display:none;">
                     </div>
                 </div>
                 
-                <!-- Full Name Input -->
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                <!-- News Title Input -->
+                <div class="news-title-field">
+                    <input type="text" class="form-control" id="newsTitleInput" placeholder="News Title" required>
                 </div>
                 
-                <!-- City and Area in One Line -->
-                <div class="mb-3 location-group">
-                    <div class="input-container">
-                        <input type="text" class="form-control" id="cityInput" placeholder="City" required>
-                        <div id="citySuggestList" class="suggest-list"></div>
-                    </div>
-                    <div class="input-container">
-                        <input type="text" class="form-control" id="areaInput" placeholder="Area" required>
-                        <div id="areaSuggestList" class="suggest-list"></div>
-                    </div>
+                <!-- Category Input with Suggestions -->
+                <div class="news-category-wrapper">
+                    <input type="text" class="news-category-field" id="newsCategoryInput" placeholder="Category" required>
+                    <div class="news-suggestions-list" id="newsCategorySuggestions"></div>
                 </div>
                 
-                <!-- Full Address Input -->
-                <div class="mb-3">
-                    <textarea class="form-control" id="address" placeholder="Full Address" rows="3" required></textarea>
+                <!-- News Content Input -->
+                <div class="news-content-area">
+                    <textarea class="form-control" id="newsContentInput" placeholder="News Content" rows="5" required></textarea>
                 </div>
                 
                 <!-- Submit Button -->
-                <button type="submit" class="next-btn w-100" id="createAccountButton">Create Account</button>
+                <button type="submit" class="news-submit-btn" id="newsSubmitButton">Post</button>
             </form>
         </div>
     </div>
@@ -95,7 +88,6 @@
             </ul>
         </div>
     </footer>
-
   <script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -1760,122 +1760,188 @@ document.addEventListener('DOMContentLoaded', function() {
 // singup page er code 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Location data
-    const locationData = {
-        bangladesh: {
-            cities: ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi', 'Sylhet'],
-            areas: {
-                'Dhaka': ['Gulshan', 'Banani', 'Dhanmondi', 'Uttara', 'Motijheel'],
-                'Chittagong': ['Agrabad', 'Nasirabad', 'Khulshi', 'Patenga', 'Halishahar'],
-                'Khulna': ['Khalishpur', 'Sonadanga', 'Boyra', 'Daulatpur', 'Khan Jahan Ali'],
-                'Rajshahi': ['Shaheb Bazar', 'Motihar', 'Padma Residential', 'Upashahar', 'Kazla'],
-                'Sylhet': ['Zindabazar', 'Ambarkhana', 'Upashahar', 'Shahjalal', 'Shibganj']
-            }
-        }
-    };
-
-    // Profile Image Upload
-    const profileUpload = document.getElementById('profileUpload');
+    // Check for dark mode and apply it
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+    if (darkModeEnabled) {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Image upload preview
+    const imageUpload = document.getElementById('profileUpload');
     const previewImage = document.querySelector('.preview-image');
+    const removeImageBtn = document.querySelector('.remove-image');
     const uploadIcon = document.querySelector('.upload-icon');
     const uploadText = document.querySelector('.upload-text');
-    const removeImageBtn = document.querySelector('.remove-image');
-
-    profileUpload.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
+    
+    imageUpload.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
             const reader = new FileReader();
-            reader.onload = function(event) {
-                previewImage.src = event.target.result;
+            
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
                 previewImage.style.display = 'block';
                 uploadIcon.style.display = 'none';
                 uploadText.style.display = 'none';
-            };
+                removeImageBtn.style.display = 'flex';
+            }
+            
             reader.readAsDataURL(file);
         }
     });
-
-    // Remove image functionality
+    
     removeImageBtn.addEventListener('click', function(e) {
         e.stopPropagation();
+        imageUpload.value = '';
         previewImage.src = '';
         previewImage.style.display = 'none';
         uploadIcon.style.display = 'block';
         uploadText.style.display = 'block';
-        profileUpload.value = ''; // Clear the file input
+        removeImageBtn.style.display = 'none';
     });
 
-    // City and Area Suggestions
-    function createSuggestionList(input, suggestList, suggestions) {
-        input.addEventListener('input', function() {
-            const value = this.value.toLowerCase();
-            suggestList.innerHTML = '';
-            suggestList.style.display = 'none';
-
-            if (value.length > 0) {
-                const filteredSuggestions = suggestions.filter(item => 
-                    item.toLowerCase().includes(value)
-                );
-
-                if (filteredSuggestions.length > 0) {
-                    filteredSuggestions.forEach(item => {
-                        const div = document.createElement('div');
-                        div.textContent = item;
-                        div.addEventListener('click', function() {
-                            input.value = item;
-                            suggestList.style.display = 'none';
-                        });
-                        suggestList.appendChild(div);
-                    });
-                    suggestList.style.display = 'block';
-                }
-            }
-        });
-
-        // Hide suggestions when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!input.contains(e.target) && !suggestList.contains(e.target)) {
-                suggestList.style.display = 'none';
-            }
-        });
-    }
-
-    // City input suggestions
+    // City and Area suggestions
     const cityInput = document.getElementById('cityInput');
-    const citySuggestList = document.getElementById('citySuggestList');
-    createSuggestionList(cityInput, citySuggestList, locationData.bangladesh.cities);
-
-    // Area input suggestions
     const areaInput = document.getElementById('areaInput');
+    const citySuggestList = document.getElementById('citySuggestList');
     const areaSuggestList = document.getElementById('areaSuggestList');
-
-    // Update area suggestions based on selected city
-    cityInput.addEventListener('change', function() {
-        const selectedCity = this.value;
-        const cityAreas = locationData.bangladesh.areas[selectedCity] || [];
-        
-        createSuggestionList(areaInput, areaSuggestList, cityAreas);
+    
+    // Database of cities and their areas
+    const cityAreaData = {
+        "Dhaka": ["Mirpur", "Gulshan", "Dhanmondi", "Uttara", "Mohammadpur", "Banani", "Bashundhara", "Motijheel", "Khilgaon", "Rampura"],
+        "Chittagong": ["Agrabad", "Nasirabad", "Khulshi", "Halishahar", "Patenga", "Chawkbazar", "GEC", "Kotwali", "Bakalia", "Chandgaon"],
+        "Rajshahi": ["Boalia", "Shaheb Bazar", "Motihar", "Katakhali", "Kajla", "Binodpur", "Bornali", "Padma Residential", "Upashahar", "Kazihata"],
+        "Khulna": ["Khalishpur", "Daulatpur", "Sonadanga", "Boyra", "Gollamari", "Rupsha", "Khulna Sadar", "Nirala", "Khan Jahan Ali", "Arongghata"],
+        "Sylhet": ["Zindabazar", "Ambarkhana", "Shahjalal Upashahar", "Shibganj", "Mirabazar", "Tilagor", "Dargah Mahalla", "Subidbazar", "Pathantula", "Sheikhghat"],
+        "Barisal": ["Sadar Road", "Nathullabad", "Amtala", "Rupatali", "Kashipur", "Kawnia", "Nobogram", "Sagardi", "Amanatganj", "Charmatha"],
+        "Rangpur": ["Dhap", "Jahaj Company More", "Lalbag Mor", "Modern More", "Shathibari", "College Road", "Shapla Chottor", "Rail Gate", "Collectorate Road", "Dhap Jail Road"],
+        "Comilla": ["Kandirpar", "Bagichagaon", "Jhautola", "Tomsom Bridge", "Chawkbazar", "Shashongacha", "Monoharpur", "Kotbari", "Jhilpar", "Bijoypur"]
+    };
+    
+    const cities = Object.keys(cityAreaData);
+    let selectedCity = '';
+    
+    // Show all city suggestions when clicking on city field
+    cityInput.addEventListener('click', function() {
+        showCitySuggestions();
     });
-
+    
+    // Filter city suggestions when typing
+    cityInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (inputVal.length > 0) {
+            const filteredCities = cities.filter(city => 
+                city.toLowerCase().includes(inputVal)
+            );
+            
+            updateCitySuggestionsList(filteredCities);
+        } else {
+            showCitySuggestions();
+        }
+    });
+    
+    // Show area suggestions when clicking on area field
+    areaInput.addEventListener('click', function() {
+        if (selectedCity) {
+            showAreaSuggestions(selectedCity);
+        }
+    });
+    
+    // Filter area suggestions when typing
+    areaInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (selectedCity && inputVal.length > 0) {
+            const areas = cityAreaData[selectedCity] || [];
+            const filteredAreas = areas.filter(area => 
+                area.toLowerCase().includes(inputVal)
+            );
+            
+            updateAreaSuggestionsList(filteredAreas);
+        } else if (selectedCity) {
+            showAreaSuggestions(selectedCity);
+        }
+    });
+    
+    function showCitySuggestions() {
+        updateCitySuggestionsList(cities);
+    }
+    
+    function showAreaSuggestions(city) {
+        const areas = cityAreaData[city] || [];
+        updateAreaSuggestionsList(areas);
+    }
+    
+    function updateCitySuggestionsList(items) {
+        citySuggestList.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(city => {
+                const div = document.createElement('div');
+                div.className = 'suggest-item';
+                div.textContent = city;
+                div.addEventListener('click', function() {
+                    cityInput.value = city;
+                    selectedCity = city;
+                    citySuggestList.style.display = 'none';
+                    
+                    // Clear and update area field when city is selected
+                    areaInput.value = '';
+                    showAreaSuggestions(city);
+                });
+                citySuggestList.appendChild(div);
+            });
+            
+            citySuggestList.style.display = 'block';
+        } else {
+            citySuggestList.style.display = 'none';
+        }
+    }
+    
+    function updateAreaSuggestionsList(items) {
+        areaSuggestList.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(area => {
+                const div = document.createElement('div');
+                div.className = 'suggest-item';
+                div.textContent = area;
+                div.addEventListener('click', function() {
+                    areaInput.value = area;
+                    areaSuggestList.style.display = 'none';
+                });
+                areaSuggestList.appendChild(div);
+            });
+            
+            areaSuggestList.style.display = 'block';
+        } else {
+            areaSuggestList.style.display = 'none';
+        }
+    }
+    
+    // Close suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== cityInput && !citySuggestList.contains(e.target)) {
+            citySuggestList.style.display = 'none';
+        }
+        
+        if (e.target !== areaInput && !areaSuggestList.contains(e.target)) {
+            areaSuggestList.style.display = 'none';
+        }
+    });
+    
     // Form submission
     const signupForm = document.getElementById('signupForm');
     signupForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Basic form validation
-        const fullName = document.getElementById('fullName').value.trim();
-        const city = cityInput.value.trim();
-        const area = areaInput.value.trim();
-        const address = document.getElementById('address').value.trim();
-        
-        if (!fullName || !city || !area || !address) {
-            alert('Please fill out all fields');
-            return;
-        }
-        
-        // In a real application, you would send this data to a server
-        alert('Account creation successful!');
-        window.location.href = 'account.html';
+        // Handle form submission here
+        alert('Account created successfully!');
+        this.reset();
+        previewImage.style.display = 'none';
+        uploadIcon.style.display = 'block';
+        uploadText.style.display = 'block';
+        selectedCity = '';
     });
 });
 
@@ -1890,3 +1956,130 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // create news page
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for dark mode and apply it
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+    if (darkModeEnabled) {
+        document.body.classList.add('dark-mode');
+    }
+    // Image upload preview
+    const imageUpload = document.getElementById('newsImageFile');
+    const previewImage = document.querySelector('.news-preview-image');
+    const removeImageBtn = document.querySelector('.news-remove-btn');
+    const uploadIcon = document.querySelector('.news-upload-icon');
+    const uploadText = document.querySelector('.news-upload-text');
+    
+    imageUpload.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+                uploadIcon.style.display = 'none';
+                uploadText.style.display = 'none';
+                removeImageBtn.style.display = 'flex';
+            }
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    removeImageBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        imageUpload.value = '';
+        previewImage.src = '';
+        previewImage.style.display = 'none';
+        uploadIcon.style.display = 'block';
+        uploadText.style.display = 'block';
+        removeImageBtn.style.display = 'none';
+    });
+    
+    // Category suggestions
+    const categoryInput = document.getElementById('newsCategoryInput');
+    const categorySuggestList = document.getElementById('newsCategorySuggestions');
+    
+    const categories = [
+        "Breaking News", "Politics", "Business", "Technology", 
+        "Sports", "Entertainment", "Health", "Science", 
+        "Education", "Environment", "World", "Local"
+    ];
+    
+    // Show all suggestions when clicking on the field
+    categoryInput.addEventListener('click', function() {
+        showAllSuggestions();
+    });
+    
+    // Also filter suggestions when typing
+    categoryInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (inputVal.length > 0) {
+            // Filter categories based on input
+            const filteredCategories = categories.filter(cat => 
+                cat.toLowerCase().includes(inputVal)
+            );
+            
+            updateSuggestionsList(filteredCategories);
+        } else {
+            showAllSuggestions();
+        }
+    });
+    
+    function showAllSuggestions() {
+        updateSuggestionsList(categories);
+    }
+    
+    function updateSuggestionsList(items) {
+        // Create suggestion list
+        categorySuggestList.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(cat => {
+                const div = document.createElement('div');
+                div.className = 'news-suggestion-item';
+                div.textContent = cat;
+                div.addEventListener('click', function() {
+                    categoryInput.value = cat;
+                    categorySuggestList.style.display = 'none';
+                });
+                categorySuggestList.appendChild(div);
+            });
+            
+            categorySuggestList.style.display = 'block';
+        } else {
+            categorySuggestList.style.display = 'none';
+        }
+    }
+    
+    // Close suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== categoryInput && !categorySuggestList.contains(e.target)) {
+            categorySuggestList.style.display = 'none';
+        }
+    });
+    
+    // Form submission
+    const newsForm = document.getElementById('newsPostForm');
+    newsForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Handle form submission here
+        alert('News posted successfully!');
+        this.reset();
+        previewImage.style.display = 'none';
+        uploadIcon.style.display = 'block';
+        uploadText.style.display = 'block';
+    });
+    
+    // Initialize dropdown in footer
+    const moreLink = document.querySelector('.more-link');
+    if (moreLink) {
+        moreLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = this.nextElementSibling;
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+});
