@@ -11,8 +11,33 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    
+    <style>
+        /* Add or modify these styles in your CSS file */
+.user-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00adef;
+    margin-bottom: 10px; /* Add space between image and text */
+    margin-right: 0; /* Remove right margin since we're stacking vertically */
+}
+       .dark-mood-icon {
+        margin-top: 90px;
+       } 
+      
+    </style>
 </head>
 <body>
     <nav class="custom-nav shadow-sm" id="mainNav">
@@ -32,16 +57,28 @@
     </nav>
     
     <div class="custom-container">
+
+      
+            <div class="dark-mode-toggle-special dark-mood-icon" id="darkModeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+      
+      
+        <div class="user-welcome text-center">
+            <img src="https://randomuser.me/api/portraits/men/85.jpg" class="user-image" alt="User Profile">
+            <div class="user-greeting">Hello, Ashraful!</div>
+        </div>
+        
         <!-- Profile Card -->
         <div class="account-card">
             <div class="profile-section">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="profile-img" alt="Profile Picture">
+                <img src="assets/img/bag.webp" class="profile-img" alt="Profile Picture">
                 <div class="profile-info">
-                    <h6 class="profile-name">Engr. Ashraful Islam</h6>
-                    <small class="edit-profile-text">Business Profile</small>
+                    <h6 class="profile-name">Business Profile Name</h6>
+                    <small class="edit-profile-text"><a href="create-business-profile.html">Create a Business Profile</a></small>
                 </div>
-                <div class="dark-mode-toggle-account" id="darkModeToggle">
-                    <i class="fas fa-moon"></i>
+                <div class="dark-mode-toggle-account">
+                    <i class="fas fa-user-plus"></i>
                 </div>
             </div>
         </div>
@@ -69,6 +106,8 @@
                     </div>
                 </div>
                 
+               
+                
                 <!-- Settings Card -->
                 <div class="col-6 mb-3">
                     <div class="option-card" id="settings-option">
@@ -77,6 +116,16 @@
                             <h6 class="option-title">Settings</h6>
                         </div>
                         <i class="fas fa-chevron-down" id="settings-toggle"></i>
+                    </div>
+                </div>
+
+                 <!-- Orders Card (New) -->
+                 <div class="col-6 mb-3">
+                    <div class="option-card" id="orders-option">
+                        <span class="option-icon"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="option-content">
+                            <h6 class="option-title">Orders</h6>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -148,6 +197,8 @@
             </div>
         </footer>
     </div>
+
+    
 
     <script src="assets/js/script.js"></script>
     <!-- Bootstrap JS Bundle with Popper -->

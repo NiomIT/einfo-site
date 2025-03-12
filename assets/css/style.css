@@ -8,6 +8,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Navigation */
 .custom-nav {
     background-color: rgba(255, 255, 255, 0.7);
@@ -1444,6 +1449,29 @@ body.dark-mode .dark-mode-toggle-special {
             min-width: 90px; /* Slightly smaller on very small screens */
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* code for forgot page */
 
