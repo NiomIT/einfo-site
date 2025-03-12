@@ -2348,3 +2348,235 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedCategory = '';
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// business profile js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for dark mode and apply it
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+    if (darkModeEnabled) {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Logo image upload preview
+    const logoImageUpload = document.getElementById('businessLogoImage');
+    const logoPreviewImage = document.querySelector('.business-preview-image');
+    const logoRemoveBtn = document.querySelector('.business-remove-btn');
+    const logoUploadIcon = document.querySelector('.business-upload-icon');
+    const logoUploadText = document.querySelector('.business-upload-text');
+    
+    // Setup image preview functionality
+    setupImagePreview(logoImageUpload, logoPreviewImage, logoRemoveBtn, logoUploadIcon, logoUploadText);
+    
+    function setupImagePreview(inputElement, previewImage, removeBtn, uploadIcon, uploadText) {
+        inputElement.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    uploadIcon.style.display = 'none';
+                    uploadText.style.display = 'none';
+                    removeBtn.style.display = 'flex';
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            inputElement.value = '';
+            previewImage.src = '';
+            previewImage.style.display = 'none';
+            uploadIcon.style.display = 'block';
+            uploadText.style.display = 'block';
+            removeBtn.style.display = 'none';
+        });
+    }
+    
+    // Category and Subcategory suggestions
+    const categoryInput = document.getElementById('categoryInput');
+    const subcategoryInput = document.getElementById('subcategoryInput');
+    const categorySuggestions = document.getElementById('categorySuggestions');
+    const subcategorySuggestions = document.getElementById('subcategorySuggestions');
+    
+    // Database of categories and subcategories
+    const categoryData = {
+"Education": ["School", "College", "University", "Training Institute", "Coaching Center", "Language School", "Technical Institute", "Vocational Training", "Tuition Center", "Online Learning"],
+
+"Healthcare": ["Hospital", "Clinic", "Doctor's Chamber", "Dental Clinic", "Diagnostic Center", "Pharmacy", "Physiotherapy Center", "Mental Health Center", "Fitness Center", "Nursing Home"],
+
+"Food & Dining": ["Restaurant", "Cafe", "Fast Food", "Bakery", "Catering Service", "Food Delivery", "Ice Cream Shop", "Coffee Shop", "Bar & Pub", "Food Truck"],
+
+"Retail": ["Supermarket", "Grocery Store", "Fashion Boutique", "Electronics Store", "Bookstore", "Hardware Store", "Gift Shop", "Furniture Store", "Pharmacy", "Department Store"],
+
+"Financial Services": ["Bank", "Insurance Company", "Investment Firm", "Finance Consultant", "Tax Service", "Accounting Firm", "Money Exchange", "Microfinance", "Credit Union", "Payment Service"],
+
+"Professional Services": ["Law Firm", "Accounting Firm", "Marketing Agency", "Consulting Firm", "Architecture Firm", "IT Services", "Engineering Firm", "Design Studio", "Translation Service", "Recruitment Agency"],
+
+"Real Estate": ["Real Estate Agency", "Property Management", "Construction Company", "Apartment Complex", "Commercial Property", "Land Development", "Interior Design", "Home Inspection", "Renovation Service", "Architecture Firm"],
+
+"Automotive": ["Car Dealership", "Auto Repair", "Car Wash", "Auto Parts Store", "Rental Service", "Towing Service", "Motorcycle Shop", "Gas Station", "Car Insurance", "Driving School"],
+
+"Technology": ["Software Company", "IT Services", "Web Development", "Digital Marketing", "Electronic Repair", "Computer Store", "Data Services", "Cloud Services", "App Development", "Cybersecurity"],
+
+"Travel & Tourism": ["Hotel", "Resort", "Travel Agency", "Tour Operator", "Car Rental", "Tourist Attraction", "Spa & Wellness", "Adventure Tourism", "Transportation Service", "Vacation Rental"],
+
+"Entertainment": ["Cinema", "Theater", "Concert Hall", "Amusement Park", "Gaming Zone", "Sports Arena", "Art Gallery", "Museum", "Nightclub", "Event Organizer"],
+
+"Manufacturing": ["Factory", "Production Plant", "Workshop", "Textile Mill", "Food Processing", "Electronics Manufacturing", "Furniture Making", "Chemical Production", "Metal Works", "Printing Press"]
+};
+    
+    const categories = Object.keys(categoryData);
+    let selectedCategory = '';
+    
+    // Show all categories when clicking on category field
+    categoryInput.addEventListener('click', function() {
+        showCategorySuggestions();
+    });
+    
+    // Filter categories when typing
+    categoryInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (inputVal.length > 0) {
+            const filteredCategories = categories.filter(cat => 
+                cat.toLowerCase().includes(inputVal)
+            );
+            
+            updateCategorySuggestionsList(filteredCategories);
+        } else {
+            showCategorySuggestions();
+        }
+    });
+    
+    // Show subcategories when clicking on subcategory field
+    subcategoryInput.addEventListener('click', function() {
+        if (selectedCategory) {
+            showSubcategorySuggestions(selectedCategory);
+        }
+    });
+    
+    // Filter subcategories when typing
+    subcategoryInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (selectedCategory && inputVal.length > 0) {
+            const subcategories = categoryData[selectedCategory] || [];
+            const filteredSubcategories = subcategories.filter(subcat => 
+                subcat.toLowerCase().includes(inputVal)
+            );
+            
+            updateSubcategorySuggestionsList(filteredSubcategories);
+        } else if (selectedCategory) {
+            showSubcategorySuggestions(selectedCategory);
+        }
+    });
+    
+    function showCategorySuggestions() {
+        updateCategorySuggestionsList(categories);
+    }
+    
+    function showSubcategorySuggestions(category) {
+        const subcategories = categoryData[category] || [];
+        updateSubcategorySuggestionsList(subcategories);
+    }
+    
+    function updateCategorySuggestionsList(items) {
+        categorySuggestions.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(cat => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = cat;
+                div.addEventListener('click', function() {
+                    categoryInput.value = cat;
+                    selectedCategory = cat;
+                    categorySuggestions.style.display = 'none';
+                    
+                    // Clear and update subcategory field when category is selected
+                    subcategoryInput.value = '';
+                    showSubcategorySuggestions(cat);
+                });
+                categorySuggestions.appendChild(div);
+            });
+            
+            categorySuggestions.style.display = 'block';
+        } else {
+            categorySuggestions.style.display = 'none';
+        }
+    }
+    
+    function updateSubcategorySuggestionsList(items) {
+        subcategorySuggestions.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(subcat => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = subcat;
+                div.addEventListener('click', function() {
+                    subcategoryInput.value = subcat;
+                    subcategorySuggestions.style.display = 'none';
+                });
+                subcategorySuggestions.appendChild(div);
+            });
+            
+            subcategorySuggestions.style.display = 'block';
+        } else {
+            subcategorySuggestions.style.display = 'none';
+        }
+    }
+    
+    // Close suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== categoryInput && !categorySuggestions.contains(e.target)) {
+            categorySuggestions.style.display = 'none';
+        }
+        
+        if (e.target !== subcategoryInput && !subcategorySuggestions.contains(e.target)) {
+            subcategorySuggestions.style.display = 'none';
+        }
+    });
+    
+    // Form submission
+    const businessForm = document.getElementById('businessForm');
+    businessForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Handle form submission here
+        alert('Business profile created successfully!');
+        this.reset();
+        
+        // Reset logo image
+        logoPreviewImage.style.display = 'none';
+        logoUploadIcon.style.display = 'block';
+        logoUploadText.style.display = 'block';
+        
+        // Reset category selection
+        selectedCategory = '';
+    });
+});

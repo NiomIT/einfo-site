@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - Create Business Profile</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+   
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item logo-container">
+                    <a href="index.html">
+                        <img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+                    </a>
+                </li>
+                <li class="nav-item"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+                <li class="nav-item"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+                <li class="nav-item active"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+                <li class="nav-item"><a href="account.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content" style="max-width: 100%; padding: 0;">
+        <div class="business-form-wrapper">
+            <h1 class="page-title text-center mb-4">Create a Business Profile</h1>
+           
+            <form id="businessForm">
+                <!-- Business Logo Upload -->
+                <div class="mb-4">
+                    <div class="business-logo-container">
+                        <div class="business-logo-uploader">
+                            <input type="file" id="businessLogoImage" accept="image/*" required>
+                            <div class="business-remove-btn">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <i class="fas fa-cloud-upload-alt business-upload-icon"></i>
+                            <div class="business-upload-text">Logo or Brand Image</div>
+                            <img class="business-preview-image" src="" alt="Business Logo" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Business Name Input -->
+                <div class="business-title-field">
+                    <input type="text" class="form-control" id="businessNameInput" placeholder="Business Name" required>
+                </div>
+                
+                <!-- Phone Number and Address Group -->
+                <div class="business-field-group">
+                    <div class="flex-grow-1">
+                        <input type="tel" class="info-field" id="businessPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="flex-grow-1">
+                        <input type="text" class="info-field" id="businessAddress" placeholder="Address" required>
+                    </div>
+                </div>
+                
+                <!-- Category and Subcategory Group -->
+                <div class="business-field-group">
+                    <div class="flex-grow-1 category-container">
+                        <input type="text" class="category-field" id="categoryInput" placeholder="Business Category" required>
+                        <div id="categorySuggestions" class="suggestions-list"></div>
+                    </div>
+                    <div class="flex-grow-1 category-container">
+                        <input type="text" class="category-field" id="subcategoryInput" placeholder="Business Subcategory" required>
+                        <div id="subcategorySuggestions" class="suggestions-list"></div>
+                    </div>
+                </div>
+                
+                <!-- Business Description Input -->
+                <div class="business-details-area">
+                    <textarea class="form-control" id="businessDetailsInput" placeholder="Business Description" rows="5" required></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="business-submit-btn" id="businessSubmitButton">Create Business Profile</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="custom-container">
+        <div class="footer-div">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li class="dropdown">
+                    <a href="#" class="more-link">More</a>
+                    <div class="dropdown-menu">
+                        <a href="admin-login.html">Admin</a>
+                        <a href="ad.html">Ad</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
