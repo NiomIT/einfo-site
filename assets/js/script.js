@@ -1889,3 +1889,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// create news page
