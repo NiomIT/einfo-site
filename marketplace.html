@@ -256,6 +256,188 @@
                 </button>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!----------------------------------------------->
+
+<!----------------side cart start --------------->
+
+<!----------------------------------------------->
+
+ <!-- rpound cart Fixed Cart Button in Corner -->
+ <div class="corner-cart-container" id="cornerCartContainer">
+
+</div>
+
+
+
+<!-- 1. Add this code just before the closing body tag in your marketplace.html -->
+
+<!-- Cart Sidebar Component -->
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h5>Shopping Cart <span class="cart-count-badge" id="cartCountBadge">0</span></h5>
+        <button class="close-cart-btn" id="closeCartBtn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer">
+        <!-- Cart items will be added here dynamically -->
+        <div class="empty-cart-message" id="emptyCartMessage">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span class="cart-total-price" id="cartTotalPrice">$0.00</span>
+        </div>
+        <button class="btn btn-primary w-100 checkout-btn" id="checkoutBtn">
+            Checkout
+        </button>
+    </div>
+</div>
+
+<!-- Cart Overlay -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<!-- Checkout Modal -->
+<div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-modal-content">
+        <div class="checkout-modal-header">
+            <h5>Complete Your Order</h5>
+            <button class="close-modal-btn" id="closeModalBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="checkout-modal-body">
+            <form id="checkoutForm">
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Delivery Address</label>
+                    <textarea class="form-control" id="address" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="paymentMethod" class="form-label">Payment Method</label>
+                    <select class="form-select" id="paymentMethod" required>
+                        <option value="" selected disabled>Select payment method</option>
+                        <option value="cash">Cash on Delivery</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="mobile">Mobile Banking</option>
+                    </select>
+                </div>
+                <!-- Card payment fields (initially hidden) -->
+                <div id="cardPaymentFields" class="payment-specific-fields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="cardNumber" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="cardNumber">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="expDate" class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" id="expDate" placeholder="MM/YY">
+                        </div>
+                        <div class="col-6">
+                            <label for="cvv" class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="cvv">
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile banking fields (initially hidden) -->
+                <div id="mobilePaymentFields" class="payment-specific-fields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="mobileProvider" class="form-label">Provider</label>
+                        <select class="form-select" id="mobileProvider">
+                            <option value="bkash">bKash</option>
+                            <option value="nagad">Nagad</option>
+                            <option value="rocket">Rocket</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobileNumber" class="form-label">Mobile Banking Number</label>
+                        <input type="text" class="form-control" id="mobileNumber">
+                    </div>
+                </div>
+                <div class="order-summary mt-4">
+                    <h6>Order Summary</h6>
+                    <div id="orderSummaryItems">
+                        <!-- Order items will be listed here -->
+                    </div>
+                    <div class="d-flex justify-content-between fw-bold mt-2">
+                        <span>Total:</span>
+                        <span id="orderTotalPrice">$0.00</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4" id="placeOrderBtn">
+                    Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="success-modal" id="successModal">
+    <div class="success-modal-content">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h4>Order Placed Successfully!</h4>
+        <p>Your order has been received and is being processed.</p>
+        <p>Order #<span id="orderNumber">12345</span></p>
+        <button class="btn btn-primary w-100 mt-3" id="continueShopping">
+            Continue Shopping
+        </button>
+    </div>
+</div>
+
+
+<!----------------------------------------------->
+
+<!----------------side cart end ----------------->
+
+<!----------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
       
         <!-- Footer with Dropdown Submenu -->
         <footer>
