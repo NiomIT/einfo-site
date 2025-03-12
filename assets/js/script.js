@@ -2083,3 +2083,268 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// add product page 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for dark mode and apply it
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+    if (darkModeEnabled) {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Main image upload preview
+    const mainImageUpload = document.getElementById('mainProductImage');
+    const mainPreviewImage = document.querySelector('.main-image .product-preview-image');
+    const mainRemoveBtn = document.querySelector('.main-image .product-remove-btn');
+    const mainUploadIcon = document.querySelector('.main-image .product-upload-icon');
+    const mainUploadText = document.querySelector('.main-image .product-upload-text');
+    
+    // Setup image preview functionality
+    setupImagePreview(mainImageUpload, mainPreviewImage, mainRemoveBtn, mainUploadIcon, mainUploadText);
+    
+    // Additional images management
+    const additionalImagesContainer = document.getElementById('additionalImagesContainer');
+    const addMoreImagesBtn = document.getElementById('addMoreImagesBtn');
+    let imageCounter = 0;
+    const MAX_IMAGES = 5; // Maximum number of additional images
+    
+    addMoreImagesBtn.addEventListener('click', function() {
+        if (imageCounter < MAX_IMAGES) {
+            addImageUploader();
+        } else {
+            alert('Maximum 5 additional images allowed');
+        }
+    });
+    
+    function addImageUploader() {
+        const imageId = 'additionalImage' + imageCounter;
+        
+        // Create container
+        const imageUploader = document.createElement('div');
+        imageUploader.className = 'product-image-uploader';
+        imageUploader.innerHTML = `
+            <input type="file" id="${imageId}" accept="image/*">
+            <div class="product-remove-btn">
+                <i class="fas fa-times"></i>
+            </div>
+            <i class="fas fa-cloud-upload-alt product-upload-icon"></i>
+            <div class="product-upload-text">Image</div>
+            <img class="product-preview-image" src="" alt="Product Image ${imageCounter + 1}" style="display:none;">
+        `;
+        
+        additionalImagesContainer.appendChild(imageUploader);
+        
+        // Setup image preview for this new uploader
+        const imageInput = document.getElementById(imageId);
+        const previewImage = imageUploader.querySelector('.product-preview-image');
+        const removeBtn = imageUploader.querySelector('.product-remove-btn');
+        const uploadIcon = imageUploader.querySelector('.product-upload-icon');
+        const uploadText = imageUploader.querySelector('.product-upload-text');
+        
+        setupImagePreview(imageInput, previewImage, removeBtn, uploadIcon, uploadText);
+        
+        // Setup remove button to remove entire uploader
+        removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            additionalImagesContainer.removeChild(imageUploader);
+            imageCounter--;
+        });
+        
+        imageCounter++;
+    }
+    
+    function setupImagePreview(inputElement, previewImage, removeBtn, uploadIcon, uploadText) {
+        inputElement.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    uploadIcon.style.display = 'none';
+                    uploadText.style.display = 'none';
+                    removeBtn.style.display = 'flex';
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            inputElement.value = '';
+            previewImage.src = '';
+            previewImage.style.display = 'none';
+            uploadIcon.style.display = 'block';
+            uploadText.style.display = 'block';
+            removeBtn.style.display = 'none';
+        });
+    }
+    
+    // Category and Subcategory suggestions
+    const categoryInput = document.getElementById('categoryInput');
+    const subcategoryInput = document.getElementById('subcategoryInput');
+    const categorySuggestions = document.getElementById('categorySuggestions');
+    const subcategorySuggestions = document.getElementById('subcategorySuggestions');
+    
+    // Database of categories and subcategories
+    const categoryData = {
+        "Electronics": ["Smartphone", "Laptop", "Headphones", "Camera", "TV", "Speaker", "Tablet", "Gaming Console", "Smartwatch", "Computer Accessories"],
+        "Fashion": ["Men's Clothing", "Women's Clothing", "Shoes", "Bags", "Jewelry", "Watches", "Accessories", "Traditional Wear", "Kids Clothing", "Sunglasses"],
+        "Home & Kitchen": ["Furniture", "Kitchenware", "Appliances", "Bedding", "Lighting", "Decor", "Storage", "Garden Tools", "Bathroom Accessories", "Cleaning Supplies"],
+        "Sports & Fitness": ["Exercise Equipment", "Sports Gear", "Outdoor Recreation", "Yoga Equipment", "Cycling", "Team Sports", "Fitness Trackers", "Swimming", "Athletic Clothing", "Camping Gear"],
+        "Books": ["Fiction", "Non-Fiction", "Educational", "Children's Books", "Business", "Self-Help", "Biography", "History", "Comics", "Magazines"],
+        "Toys & Games": ["Puzzles", "Board Games", "Action Figures", "Educational Toys", "Dolls", "Outdoor Toys", "Electronic Toys", "Building Toys", "Art Supplies", "Collectibles"],
+        "Beauty & Health": ["Skincare", "Makeup", "Hair Care", "Fragrance", "Personal Care", "Wellness", "Healthcare", "Organic Products", "Bath & Body", "Men's Grooming"],
+        "Automotive": ["Car Accessories", "Motorcycle Accessories", "Car Parts", "Interior Accessories", "Exterior Accessories", "Car Electronics", "Oils & Fluids", "Tools & Equipment", "Car Care", "Motorcycle Parts"]
+    };
+    
+    const categories = Object.keys(categoryData);
+    let selectedCategory = '';
+    
+    // Show all categories when clicking on category field
+    categoryInput.addEventListener('click', function() {
+        showCategorySuggestions();
+    });
+    
+    // Filter categories when typing
+    categoryInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (inputVal.length > 0) {
+            const filteredCategories = categories.filter(cat => 
+                cat.toLowerCase().includes(inputVal)
+            );
+            
+            updateCategorySuggestionsList(filteredCategories);
+        } else {
+            showCategorySuggestions();
+        }
+    });
+    
+    // Show subcategories when clicking on subcategory field
+    subcategoryInput.addEventListener('click', function() {
+        if (selectedCategory) {
+            showSubcategorySuggestions(selectedCategory);
+        }
+    });
+    
+    // Filter subcategories when typing
+    subcategoryInput.addEventListener('input', function() {
+        const inputVal = this.value.trim().toLowerCase();
+        
+        if (selectedCategory && inputVal.length > 0) {
+            const subcategories = categoryData[selectedCategory] || [];
+            const filteredSubcategories = subcategories.filter(subcat => 
+                subcat.toLowerCase().includes(inputVal)
+            );
+            
+            updateSubcategorySuggestionsList(filteredSubcategories);
+        } else if (selectedCategory) {
+            showSubcategorySuggestions(selectedCategory);
+        }
+    });
+    
+    function showCategorySuggestions() {
+        updateCategorySuggestionsList(categories);
+    }
+    
+    function showSubcategorySuggestions(category) {
+        const subcategories = categoryData[category] || [];
+        updateSubcategorySuggestionsList(subcategories);
+    }
+    
+    function updateCategorySuggestionsList(items) {
+        categorySuggestions.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(cat => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = cat;
+                div.addEventListener('click', function() {
+                    categoryInput.value = cat;
+                    selectedCategory = cat;
+                    categorySuggestions.style.display = 'none';
+                    
+                    // Clear and update subcategory field when category is selected
+                    subcategoryInput.value = '';
+                    showSubcategorySuggestions(cat);
+                });
+                categorySuggestions.appendChild(div);
+            });
+            
+            categorySuggestions.style.display = 'block';
+        } else {
+            categorySuggestions.style.display = 'none';
+        }
+    }
+    
+    function updateSubcategorySuggestionsList(items) {
+        subcategorySuggestions.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(subcat => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = subcat;
+                div.addEventListener('click', function() {
+                    subcategoryInput.value = subcat;
+                    subcategorySuggestions.style.display = 'none';
+                });
+                subcategorySuggestions.appendChild(div);
+            });
+            
+            subcategorySuggestions.style.display = 'block';
+        } else {
+            subcategorySuggestions.style.display = 'none';
+        }
+    }
+    
+    // Close suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== categoryInput && !categorySuggestions.contains(e.target)) {
+            categorySuggestions.style.display = 'none';
+        }
+        
+        if (e.target !== subcategoryInput && !subcategorySuggestions.contains(e.target)) {
+            subcategorySuggestions.style.display = 'none';
+        }
+    });
+    
+    // Form submission
+    const productForm = document.getElementById('productForm');
+    productForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Handle form submission here
+        alert('Product added successfully!');
+        this.reset();
+        
+        // Reset main image
+        mainPreviewImage.style.display = 'none';
+        mainUploadIcon.style.display = 'block';
+        mainUploadText.style.display = 'block';
+        
+        // Clear additional images
+        additionalImagesContainer.innerHTML = '';
+        imageCounter = 0;
+        
+        // Reset category selection
+        selectedCategory = '';
+    });
+});

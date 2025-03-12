@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - Add Product</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item logo-container">
+                    <a href="index.html">
+                        <img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+                    </a>
+                </li>
+                <li class="nav-item"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+                <li class="nav-item"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+                <li class="nav-item active"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+                <li class="nav-item"><a href="account.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content" style="max-width: 100%; padding: 0;">
+        <div class="product-form-wrapper">
+            <h1 class="page-title text-center mb-4">Add Product</h1>
+            
+            <form id="productForm">
+                <!-- Product Image Upload -->
+                <div class="mb-3">
+                    <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+                        <div class="product-image-uploader main-image">
+                            <input type="file" id="mainProductImage" accept="image/*" required>
+                            <div class="product-remove-btn">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <i class="fas fa-cloud-upload-alt product-upload-icon"></i>
+                            <div class="product-upload-text">Main Image</div>
+                            <img class="product-preview-image" src="" alt="Main Product Image" style="display:none;">
+                        </div>
+                    </div>
+                    
+                    <div class="product-image-container">
+                        <div id="additionalImagesContainer">
+                            <!-- Additional images will be added here -->
+                        </div>
+                        
+                        <div class="add-more-images" id="addMoreImagesBtn">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Title Input -->
+                <div class="product-title-field">
+                    <input type="text" class="form-control" id="productTitleInput" placeholder="Product Title" required>
+                </div>
+                
+                <!-- Price and Discount Group -->
+                <div class="product-field-group">
+                    <div class="flex-grow-1">
+                        <input type="number" class="price-field" id="productPrice" placeholder="Price" min="0" required>
+                    </div>
+                    <div class="flex-grow-1">
+                        <input type="number" class="price-field" id="discountPrice" placeholder="Discount Price (Optional)">
+                    </div>
+                </div>
+                
+                <!-- Category and Subcategory Group -->
+                <div class="product-field-group">
+                    <div class="flex-grow-1 category-container">
+                        <input type="text" class="category-field" id="categoryInput" placeholder="Category" required>
+                        <div id="categorySuggestions" class="suggestions-list"></div>
+                    </div>
+                    <div class="flex-grow-1 category-container">
+                        <input type="text" class="category-field" id="subcategoryInput" placeholder="Subcategory" required>
+                        <div id="subcategorySuggestions" class="suggestions-list"></div>
+                    </div>
+                </div>
+                
+                <!-- Product Details Input -->
+                <div class="product-details-area">
+                    <textarea class="form-control" id="productDetailsInput" placeholder="Product Details" rows="5" required></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="product-submit-btn" id="productSubmitButton">Add Product</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="custom-container">
+        <div class="footer-div">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li class="dropdown">
+                    <a href="#" class="more-link">More</a>
+                    <div class="dropdown-menu">
+                        <a href="admin-login.html">Admin</a>
+                        <a href="ad.html">Ad</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
