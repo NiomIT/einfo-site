@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <title>eINFO - News Article</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="custom-nav shadow-sm" id="mainNav">
+        <div class="custom-container">
+            <ul class="nav-list">
+                <li class="nav-item logo-container">
+                    <a href="index.html">
+                        <img class="mylogo" id="siteLogo" src="assets/img/logo.png" alt="eINFO Logo">
+                    </a>
+                </li>
+                <li class="nav-item"><a href="phonebook.html"><i class="fas fa-address-book"></i></a></li>
+                <li class="nav-item active"><a href="newsfeed.html"><i class="fas fa-newspaper"></i></a></li>
+                <li class="nav-item"><a href="marketplace.html"><i class="fas fa-shopping-bag"></i></a></li>
+                <li class="nav-item"><a href="account.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="custom-container">
+        <!-- Tab-style buttons with close button -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" id="profileTab">
+                <i class="fas fa-user me-2"></i><span class="button-text">Profile</span>
+            </button>
+            <button class="tab-btn" id="newsTab">
+                <i class="fas fa-newspaper me-2"></i><span class="button-text">News</span>
+            </button>
+            <button class="tab-btn" id="servicesTab">
+                <i class="fas fa-shopping-bag me-2"></i><span class="button-text">Products</span>
+            </button>
+            <button class="close-btn" id="closeTab">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="news-view-section my-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="news-view-header">
+                        <!-- Title with simplified edit icon -->
+                        <div class="title-container">
+                            <h1 class="news-view-title">Mohammad Shahriar</h1>
+                            <i class="fas fa-edit text-muted edit-icon"></i>
+                        </div>
+                        
+                        <!-- Category and time below title -->
+                        <div class="article-meta mt-2">
+                            <small class="text-muted ms-2">
+                                <span class="me-3"><i class="fas fa-school"></i> Education - School</span>
+                                <span><i class="fas fa-map-marker-alt"></i> 123 Education Road, City</span>
+                            </small>
+                        </div>
+                        
+                        
+                        <div class="news-view-image my-4">
+                            <img src="https://randomuser.me/api/portraits/men/41.jpg" class="img-fluid w-100" alt="Community Center">
+                        </div>
+                    </div>
+                    
+                    <div class="news-view-content">
+                        <p>The local community center, a beloved landmark in our neighborhood, has completed its much-anticipated renovation. After months of construction and community fundraising, the center is now ready to serve residents with enhanced facilities and improved amenities.</p>
+                        
+                        <p>The renovation project, which began six months ago, aimed to modernize the facility while preserving its historical significance. Key improvements include:</p>
+                        
+                        <ul>
+                            <li>A new state-of-the-art multipurpose hall</li>
+                            <li>Upgraded children's play area</li>
+                            <li>Modernized fitness center with latest equipment</li>
+                            <li>Improved accessibility features</li>
+                            <li>Energy-efficient lighting and solar panels</li>
+                        </ul>
+                        
+                        <p>"This renovation represents more than just a building upgrade," said Mayor Sarah Thompson during the opening ceremony. "It's a testament to our community's commitment to growth, inclusivity, and shared spaces that bring people together."</p>
+                        
+                        <p>Local residents are already expressing excitement about the new facilities. Community programs, workshops, and events are expected to resume in the coming weeks, offering something for every age group.</p>
+                        
+                        
+                        <p>The center will host an open house next weekend, inviting all community members to tour the new facilities and learn about upcoming programs.</p>
+                    </div>
+                    
+                    <!-- Redesigned action box for like, comment, share -->
+                    <div class="news-view-actions">
+                        <button class="action-btn">
+                            <i class="fas fa-phone me-2"></i> Call
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-globe me-2"></i> Social
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-share me-2"></i> Share
+                        </button>
+                    </div>
+                    
+                    <div class="comments-section mt-4 text-center">
+                        <h4 class="mb-3 text-muted">Profile Recommendation Coming Soon!</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer with Dropdown Submenu -->
+    <footer class="custom-container">
+        <div class="footer-div">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li class="dropdown">
+                    <a href="#" class="more-link">More</a>
+                    <div class="dropdown-menu">
+                        <a href="admin-login.html">Admin</a>
+                        <a href="ad.html">Ad</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+   
+</body>
+</html>

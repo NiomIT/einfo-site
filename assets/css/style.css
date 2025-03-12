@@ -1886,3 +1886,172 @@ body.dark-mode .password-field {
     body.dark-mode #areaSuggestList div:hover {
         background-color: #2a2a2a;
     }
+
+
+
+
+
+
+
+
+
+
+
+    /* details page code */
+    
+        /* Tab-style buttons */
+        .tab-buttons {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 15px;
+            position: relative;
+            padding-right: 40px; /* Make space for close button */
+        }
+        
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 3px solid #0d6efd;
+            color: #0d6efd;
+        }
+        
+        .tab-btn:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #6c757d;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+        
+        .close-btn:hover {
+            color: #dc3545;
+        }
+        
+        body.dark-mode .close-btn {
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode .close-btn:hover {
+            color: #dc3545;
+        }
+        
+        /* Title with edit button */
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .article-meta {
+            margin-bottom: 20px;
+        }
+        
+        /* Simple edit icon */
+        .edit-icon {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .edit-icon:hover {
+            color: #0d6efd;
+        }
+
+        /* Action box for like, comment, share */
+        .news-view-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+            padding: 15px 0;
+            margin: 20px 0;
+        }
+        
+        .action-btn {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .action-btn:not(:last-child) {
+            border-right: 1px solid #dee2e6;
+        }
+        
+        .action-btn:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+        }
+
+        /* Dark mode fixes for tab buttons */
+        body.dark-mode .tab-buttons {
+            background-color: var(--dark-card-bg);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .tab-btn.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .tab-btn:hover {
+            background-color: rgba(0, 173, 239, 0.1); /* Using primary color with opacity */
+        }
+
+        /* Dark mode fixes for action buttons */
+        body.dark-mode .news-view-actions {
+            border-color: var(--dark-border);
+            background-color: var(--dark-card-bg);
+        }
+
+        body.dark-mode .action-btn {
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .action-btn:not(:last-child) {
+            border-color: var(--dark-border);
+        }
+        
+        body.dark-mode .action-btn:hover {
+            background-color: rgba(0, 173, 239, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* Make sure dark mode tabs transition smoothly */
+        .tab-buttons {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tab-btn {
+            transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+        }

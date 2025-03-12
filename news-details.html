@@ -12,85 +12,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    <style>
-        /* Tab-style buttons */
-        .tab-buttons {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #dee2e6;
-            margin-bottom: 15px;
-        }
-        
-        .tab-btn {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            background: transparent;
-            border: none;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        
-        .tab-btn.active {
-            border-bottom: 3px solid #0d6efd;
-            color: #0d6efd;
-        }
-        
-        .tab-btn:hover {
-            background-color: rgba(13, 110, 253, 0.1);
-        }
-        
-        /* Title with edit button */
-        .title-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .article-meta {
-            margin-bottom: 20px;
-        }
-        
-        /* Simple edit icon */
-        .edit-icon {
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .edit-icon:hover {
-            color: #0d6efd;
-        }
-
-        /* Dark mode fixes for tab buttons */
-body.dark-mode .tab-buttons {
-    background-color: var(--dark-card-bg);
-    border-bottom: 1px solid var(--dark-border);
-}
-
-body.dark-mode .tab-btn {
-    color: var(--dark-text);
-}
-
-body.dark-mode .tab-btn.active {
-    border-bottom: 3px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-body.dark-mode .tab-btn:hover {
-    background-color: rgba(0, 173, 239, 0.1); /* Using primary color with opacity */
-}
-
-/* Make sure dark mode tabs transition smoothly */
-.tab-buttons {
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.tab-btn {
-    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-}
-    </style>
 </head>
 <body>
     <nav class="custom-nav shadow-sm" id="mainNav">
@@ -110,7 +31,7 @@ body.dark-mode .tab-btn:hover {
     </nav>
     
     <div class="custom-container">
-        <!-- Tab-style buttons instead of filter-section -->
+        <!-- Tab-style buttons with close button -->
         <div class="tab-buttons">
             <button class="tab-btn" id="profileTab">
                 <i class="fas fa-user me-2"></i><span class="button-text">Profile</span>
@@ -119,7 +40,10 @@ body.dark-mode .tab-btn:hover {
                 <i class="fas fa-newspaper me-2"></i><span class="button-text">News</span>
             </button>
             <button class="tab-btn" id="servicesTab">
-                <i class="fas fa-shopping-bag me-2"></i><span class="button-text">Services</span>
+                <i class="fas fa-shopping-bag me-2"></i><span class="button-text">Products</span>
+            </button>
+            <button class="close-btn" id="closeTab">
+                <i class="fas fa-times"></i>
             </button>
         </div>
 
@@ -134,10 +58,10 @@ body.dark-mode .tab-btn:hover {
                         </div>
                         
                         <!-- Category and time below title -->
-                        <div class="article-meta">
-                            <small class="text-muted ms-2">
-                                <i class="fas fa-folder me-1"></i> Category Name
-                                <i class="fas fa-clock me-1"></i> 2 hours ago
+                        <div class="article-meta mt-2">
+                            <small class="text-muted ms-2"> 
+                                <span class="me-3"><i class="fas fa-folder me-1"></i> Media</span>
+                                <span><i class="fas fa-clock me-1"></i> 2 hours ago</span>
                             </small>
                         </div>
                         
@@ -168,14 +92,21 @@ body.dark-mode .tab-btn:hover {
                         <p>The center will host an open house next weekend, inviting all community members to tour the new facilities and learn about upcoming programs.</p>
                     </div>
                     
-                    <div class="news-view-actions my-4">
-                        <button class="btn btn-outline-primary me-2"><i class="far fa-heart me-1"></i> Like</button>
-                        <button class="btn btn-outline-secondary me-2"><i class="far fa-comment me-1"></i> Comment</button>
-                        <button class="btn btn-outline-success"><i class="fas fa-share me-1"></i> Share</button>
+                    <!-- Redesigned action box for like, comment, share -->
+                    <div class="news-view-actions">
+                        <button class="action-btn">
+                            <i class="far fa-heart me-2"></i> Like
+                        </button>
+                        <button class="action-btn">
+                            <i class="far fa-comment me-2"></i> Comment
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-share me-2"></i> Share
+                        </button>
                     </div>
                     
-                    <div class="comments-section mt-4">
-                        <h4 class="mb-3 text-muted">Comments Comming Soon!</h4>
+                    <div class="comments-section mt-4 text-center">
+                        <h4 class="mb-3 text-muted">Comments Coming Soon!</h4>
                     </div>
                 </div>
             </div>
@@ -203,22 +134,6 @@ body.dark-mode .tab-btn:hover {
     <script src="assets/js/script.js"></script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Added script to handle tab switching -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.tab-btn');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Remove active class from all tabs
-                    tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
-                    this.classList.add('active');
-                });
-            });
-        });
-    </script>
+   
 </body>
 </html>
