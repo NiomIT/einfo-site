@@ -12,6 +12,80 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+      /* Messenger-Style Notification Badge Styles */
+.contact-img-container {
+    position: relative;
+    overflow: visible; /* Important to show overlapping badge */
+}
+
+.contact-img {
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -14px;
+    left: -12px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    transform: rotate(0deg); /* No rotation for messenger style */
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3)); /* Add shadow for depth */
+}
+
+/* Style for notice badge */
+.badge-notice {
+    background-image: url('notice.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Style for offer badge */
+.badge-offer {
+    background-image: url('offer.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Style for discount badge */
+.badge-discount {
+    background-image: url('discount.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Text Style for the badge */
+.badge-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1;
+    width: 100%;
+}
+
+/* Make badges responsive */
+@media (max-width: 576px) {
+    .notification-badge {
+        width: 32px;
+        height: 32px;
+        top: -14px;
+        left: -12px;
+    }
+    
+    .badge-text {
+        font-size: 8px;
+    }
+}
+    </style>
 </head>
 <body>
     <nav class="custom-nav shadow-sm" id="mainNav">
@@ -78,9 +152,15 @@
         <!-- Contact List -->
         <div class="contact-list my-3">
             <!-- Contact 1 -->
+
             <div class="contact-card">
                 <div class="contact-card-inner">
                     <div class="contact-img-container">
+                        <!-- Notification Badge -->
+                        <div class="notification-badge badge-notice">
+                            <div class="badge-text">20%<br>OFF</div>
+                        </div>
+                        <!-- Profile Image -->
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" class="contact-img" alt="MD Badol">
                     </div>
                     <div class="contact-details">
@@ -97,11 +177,16 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Contact 2 -->
+                                
+            <!-- Contact with offer badge -->
             <div class="contact-card">
                 <div class="contact-card-inner">
                     <div class="contact-img-container">
+                        <!-- Notification Badge -->
+                        <div class="notification-badge badge-offer">
+                            <div class="badge-text" style="font-size: 7px; rotate: ;">Combo<br>OFFER</div>
+                        </div>
+                        <!-- Profile Image -->
                         <img src="https://randomuser.me/api/portraits/men/41.jpg" class="contact-img" alt="Test">
                     </div>
                     <div class="contact-details">
@@ -110,6 +195,32 @@
                             <i class="fas fa-user-tag"></i> সাধারণ ব্যবহারকারী
                         </div>
                         <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 3/8.01768603251</p>
+                    </div>
+                    <div class="contact-action">
+                        <button class="call-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact with discount badge -->
+            <div class="contact-card">
+                <div class="contact-card-inner">
+                    <div class="contact-img-container">
+                        <!-- Notification Badge -->
+                        <div class="notification-badge badge-discount">
+                            <div class="badge-text" style="font-size: 5px;">Job<br>NOTICE</div>
+                        </div>
+                        <!-- Profile Image -->
+                        <img src="https://randomuser.me/api/portraits/women/56.jpg" class="contact-img" alt="Mohammad Shahriar">
+                    </div>
+                    <div class="contact-details">
+                        <h5 class="contact-name">Mohammad Shahriar</h5>
+                        <div class="contact-category">
+                            <i class="fas fa-user-tag"></i> সাধারণ ব্যবহারকারী
+                        </div>
+                        <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 01,Mohammad Shahriar</p>
                     </div>
                     <div class="contact-action">
                         <button class="call-btn">
